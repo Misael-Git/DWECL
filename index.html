@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misael Barrera Ojeda - Lenguaje de Marcas</title>
+    <style>
+        /* Estilo general */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            height: 81vh;
+            overflow: hidden; /* Evitar el desplazamiento del body */
+        }
+
+        footer {
+            bottom: 0;
+            left: 0;
+            background-size: cover;
+            background-color: #222;
+            z-index: -1;
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin: 10px 0;
+            z-index: 2;
+            position: relative;
+        }
+
+        h1 {
+            margin-top: 1%;
+            font-size: 2.5em;
+            color: #82a3ff;
+        }
+
+        h2 {
+            font-size: 1.5em;
+        }
+
+        h4 {
+            cursor: pointer;
+        }
+
+        /* Fondo estilo Matrix */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 0;
+            animation: matrix-animation 10s linear infinite;
+            mask-image: radial-gradient(circle, transparent, black 60%);
+        }
+
+        @keyframes matrix-animation {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                rgba(76, 0, 255, 0.2) 0 1px,
+                transparent 1px 20px
+            );
+            z-index: 0;
+            animation: glow 3s alternate infinite;
+        }
+
+        @keyframes glow {
+            0% { opacity: 0.1; }
+            100% { opacity: 0,4; }
+        }
+
+        /* Panel lateral */
+        aside {
+            width: 250px;
+            padding: 20px;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.05);
+            z-index: 3;
+            backdrop-filter: blur(10px);
+            overflow-y: auto; /* Habilitar desplazamiento vertical */
+            transition-duration: 500ms;
+            -ms-overflow-style: none;  /* Para Internet Explorer y Edge */
+            scrollbar-width: none;  /* Para Firefox */
+        }
+
+        /* Ocultar la barra de desplazamiento */
+        aside::-webkit-scrollbar {
+            display: none; /* Para navegadores basados en WebKit (Chrome, Safari) */
+        }
+
+        aside:hover {
+            width: 250px;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition-duration: 500ms;
+        }
+
+        aside h3 {
+            color: #82a3ff;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            width: 60%;
+            text-align: center;
+            background-color: #222;
+            padding: 20px;
+            height: 6em;
+            bottom: 0;
+            color: #fff;
+            z-index: 2;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5); /* Sombra para un efecto de profundidad */
+            display: flex; /* Usar flexbox en el footer */
+            flex-direction: column; /* Colocar elementos en columna */
+            padding-left: 20%;
+            padding-right: 20%;
+        }
+
+        .footer-content {
+            display: flex; /* Usar flexbox para alinear textarea y botón en una fila */
+            justify-content: center; /* Centrar horizontalmente */
+            margin-top: 10px; /* Espacio superior */
+        }
+
+        footer h3 {
+            color: #82a3ff;
+            margin: -.01%;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #82a3ff; /* Color de fondo del botón */
+            color: rgb(0, 0, 0); /* Color del texto del botón */
+            border: none; /* Sin borde */
+            border-radius: 5px; /* Bordes redondeados */
+            cursor: pointer; /* Cambia el cursor al pasar el ratón */
+            transition: background-color 0.3s; /* Transición suave */
+        }
+
+        button:hover {
+            background-color: #c99fff; /* Color al pasar el ratón */
+        }
+
+        textarea {
+            width: 70%; /* Ajustar el ancho del textarea */
+            margin-right: 10px; /* Espacio a la derecha del textarea */
+            padding: 10px; /* Espaciado interno */
+            border: none; /* Sin borde */
+            border-radius: 5px; /* Bordes redondeados */
+            resize: none; /* Evitar redimensionar */
+        }
+
+        .exercise-list {
+            margin-top: 10px;
+        }
+
+        .exercise-list li {
+            list-style: none;
+            margin: 10px 0;
+        }
+
+        .exercise-list a {
+            color: #82a3ff;
+            font-size: 1.1em;
+            transition: color 0.3s;
+        }
+
+        .exercise-list a:hover {
+            color: #c99fff;
+        }
+
+        .exercise-list .share-btn {
+            color: #82a3ff;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: color 0.3s;
+        }
+
+        .exercise-list .share-btn:hover {
+            color: #c99fff;
+        }
+
+        /* Contenedor principal */
+        .main-content {
+            margin-left: 15%;
+            margin-bottom: 2%;
+            width: 83%;
+            padding: 20px;
+            z-index: 1;
+            position: relative;
+            height: 100%;
+        }
+
+        /* Pestañas */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            background: #222;
+            border: 1px solid #82a3ff;
+            color: #82a3ff;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin: 0 5px;
+        }
+
+        .tab:hover {
+            background: #82a3ff;
+            color: black;
+        }
+
+        .tab.active {
+            background: #82a3ff;
+            color: black;
+        }
+
+        .content {
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        iframe {
+            width: 90%;
+            height: 670px; /* Aumentado el alto del iframe */
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin: 20px 5%; /* Añadido margen izquierdo y derecho */
+            background: white;
+            z-index: 2;
+        }
+
+        .logo {
+            margin-left: 90%;
+            margin-top: -40%;
+            border: white;
+            mask-border: radial-gradient(transparent, rgb(255, 255, 255) 100%);
+        }
+
+    </style>
+</head>
+<body>
+    <aside>
+        <h3>Ejercicios</h3>
+        <div class="exercise-list" id="tema1Exercises">
+            <h4 class="toggle" onclick="toggleVisibility('tema1ExercisesContent')">Ejercicios Tema 1 | Repaso HTML, CSS y JS</h4>
+            <div class="content" id="tema1ExercisesContent">
+                <ul>
+                    <li><a href="TEMA 1/Ejercicios Introduccion/Ej1.1.html" target="content-frame" onclick="updateTitle('Ej1.1')">Ej1.1</a><span class="share-btn" onclick="window.open('TEMA 1/Ejercicios Introduccion/Ej1.1.html', '_blank')">🔗</span></li>
+                </ul>
+            </div>
+        </div>
+
+    </aside>
+
+    <div class="main-content">
+        <h1>Lenguaje de Marcas</h1>
+        <h2 id="fileTitle">CMD</h2>
+
+        <div>
+            <img src="Misa-chiquito.png" alt="" height="80px" class="logo">
+        </div>
+
+        <!-- Contenido -->
+        <div class="content active" id="tema1ExercisesContent">
+            <iframe name="content-frame" id="iframe" src="https://cmd.to" onload="scrollToTop()"></iframe>
+        </div>
+    </div>
+
+    <!--
+    <footer>
+        <h3>Sugerencias</h3>
+        <div class="footer-content">
+            <textarea rows="1" placeholder="Escribe tus sugerencias aquí... (aún eso no funciona 🙃)"></textarea>
+            <a id="mailtoLink" href="mailto:mbaroje1506@g.educaand.es?subject=Sugerencia&body=" target="_blank">
+                <button>Enviar Sugerencia</button>
+            </a>
+        </div>
+    </footer>
+-->
+    
+    <script>
+        function updateTitle(title) {
+            document.getElementById('fileTitle').innerText = title;
+        }
+        
+        document.getElementById('mailtoLink').onclick = function() {
+            const suggestion = document.getElementById('suggestionText').value.trim(); // Obtener el texto del textarea
+            const email = "mbaroje1506@g.educaand.es"; // Cambia esto por tu dirección de correo
+            const subject = "Sugerencia"; // Asunto del correo
+            const body = encodeURIComponent(suggestion); // Codificar el cuerpo del mensaje
+
+            // Crear el enlace mailto con el texto del textarea
+            this.href = `mailto:${email}?subject=${subject}&body=${body}`;
+        };
+
+        function scrollToTop() {
+            window.scrollTo(0, 0); // Desplazarse a la parte superior de la página
+        }
+
+        function toggleVisibility(contentId) {
+            const content = document.getElementById(contentId);
+            if (content.style.display === "block") {
+                content.style.display = "none"; // Ocultar si está visible
+            } else {
+                content.style.display = "block"; // Mostrar si está oculto
+            }
+        }
+    </script>
+</body>
+</html>

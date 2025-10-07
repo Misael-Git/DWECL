@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1.4</title>
+</head>
+<body>
+    <select name="imagen" id="getImagen" onchange="mostrarImagen()">
+        <option value="Ej1.4 Images/dragonKhan.jpg">Dragon Khan</option>
+        <option value="Ej1.4 Images/furiusBaco.jpg">Furius Baco</option>
+        <option value="Ej1.4 Images/redForce.jpg">Red Force</option>
+        <option value="Ej1.4 Images/shambhala.jpg">Shambhala</option>
+        <option value="Ej1.4 Images/shambhala+dragonKhan.jpg">Shambhala y Dragon Khan</option>
+    </select>
+
+    <div id="setImagen"></div>
+
+    <script>
+        function mostrarImagen() {
+            imagen = document.getElementById("getImagen").value;
+            document.getElementById("setImagen").innerHTML = `<img src="${imagen}" alt="${imagen}" width = 50%>`;
+        }
+    </script>
+</body>
+</html>

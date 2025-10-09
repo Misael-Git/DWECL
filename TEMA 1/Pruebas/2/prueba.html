@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba 2</title>
+</head>
+<body>
+    <h1>Prueba 2</h1>
+    
+    <p id="texto"></p>
+    
+    <SCRIPT LANGUAGE="JavaScript">
+        console.log("Hola mundo");
+        /* Esto es un comentario en 
+        Javascript multilínea */ 
+    </SCRIPT>
+    
+<script>
+    function ejemplo() {
+        ejemplo = 3;
+        if (ejemplo === 3) {
+            var variable1 = 1;
+            let variable2 = 2;
+        }
+        console.log("variable1 =" + variable1); // Variable1 existe en este lugar
+        
+        try {
+            console.log("variable2 =" + variable2); // Variable2 no existe en este lugar
+        } catch (error) {
+            console.log("Ni modo");
+        }
+    }
+
+    ejemplo();
+
+
+    let diaSem;
+    diaSem = prompt("Dime un día de la semana");
+    hora = prompt("¿A qué hora? (primera, segunda,... sexta)")
+
+    if (diaSem == "jueves" && (hora == "sexta" || hora == "ultima"))
+        document.getElementById("texto").innerHTML = "Prepárate para escuchar las flautas";
+    else
+        document.getElementById("texto").innerHTML = "Hoy te has librado";
+        
+
+</script>
+
+</body>
+</html>

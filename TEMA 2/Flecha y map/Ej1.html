@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora número aleatorio</title>
+</head>
+<body>
+    <h1>Calculadora número aleatorio</h1>
+
+    <label for="max">Límite:</label>
+    <input type="number" id="max">
+    <br><br>
+
+    <button type="button" onclick="generarAleatorio()">Generar número aleatorio</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        // Función flecha
+        const aleatorio = (max) => {
+            return Math.floor(Math.random() * max) + 1;
+        };
+
+        function generarAleatorio() {
+            max = document.getElementById("max").value
+            document.getElementById("resultado").innerHTML = aleatorio(max);
+        }
+
+    </script>
+</body>
+</html>

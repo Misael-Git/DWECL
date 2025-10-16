@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora Flecha Minimalista</title>
+</head>
+<body>
+
+    <h1>Calculadora Flecha</h1>
+
+    <label for="num1">Número 1:</label>
+    <input type="number" id="num1" value="1">
+    <br><br>
+
+    <label for="num2">Número 2:</label>
+    <input type="number" id="num2" value="1">
+    <br><br>
+
+    <button onclick="calcular('sumar')">+</button>
+    <button onclick="calcular('restar')">-</button>
+    <button onclick="calcular('multiplicar')">*</button>
+    <button onclick="calcular('dividir')">/</button>
+    
+    <hr>
+    <p id="resultado"></p>
+
+    <script>
+        // Funciones flecha
+        const sumar = (a, b) => { return a + b }
+        const restar = (a, b) => { return a - b }
+        const multiplicar = (a, b) => { return a * b }
+        const dividir = (a, b) => {
+            if (a == 0 || b == 0)
+                return "Error: División contiene cero";
+            else
+                return a / b;
+        }
+
+        function calcular(operacion) {
+            const n1 = parseFloat(document.getElementById('num1').value) || 0;
+            const n2 = parseFloat(document.getElementById('num2').value) || 0;
+            let resultado;
+            let operadorSimbolo;
+
+            switch (operacion) {
+                case 'sumar':
+                    resultado = sumar(n1, n2);
+                    operadorSimbolo = '+';
+                    break;
+                case 'restar':
+                    resultado = restar(n1, n2);
+                    operadorSimbolo = '-';
+                    break;
+                case 'multiplicar':
+                    resultado = multiplicar(n1, n2);
+                    operadorSimbolo = '×';
+                    break;
+                case 'dividir':
+                    resultado = dividir(n1, n2);
+                    operadorSimbolo = '÷';
+            }
+
+            // Mostrar el resultado en el elemento <p>
+            document.getElementById('resultado').innerHTML = 
+                `${n1} ${operadorSimbolo} ${n2} = <b>${resultado}</b>`;
+        }
+    </script>
+</body>
+</html>

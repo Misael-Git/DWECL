@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestor Simple de Ciudades (Map)</title>
+</head>
+<body>
+
+    <h1>Gestión de Ciudades</h1>
+
+    <h2>1. Lista Actual</h2>
+    <ul id="listaCiudades"></ul>
+    
+    <button onclick="renderizarLista()">Ver Todas (1)</button>
+    <button onclick="contarCiudades()">Contar Ciudades (2)</button>
+    <button onclick="ciudadExtrema('max')">Más Habitantes (5)</button>
+    <button onclick="ciudadExtrema('min')">Menos Habitantes (6)</button>
+    
+    <hr>
+
+    <h3>3. Borrar Ciudad</h3>
+    <input type="text" id="borrarNombre" placeholder="Nombre a borrar">
+    <button onclick="borrarCiudad()">Borrar</button>
+    
+    <hr>
+
+    <h3>4. Añadir Ciudad</h3>
+    <input type="text" id="anadirNombre" placeholder="Nombre de la ciudad">
+    <input type="number" id="anadirHabitantes" placeholder="Habitantes" min="1">
+    <button onclick="anadirCiudad()">Añadir</button>
+
+    <script>
+        // Map
+        const ciudadesMap = new Map([
+            ['Madrid', 3300000],
+            ['Barcelona', 1600000],
+            ['Valencia', 800000],
+            ['Sevilla', 700000]
+        ]);
+
+        // Función que genera la lista HTML (1)
+        function renderizarLista(color = '', ciudadDestacada = '') {
+            const listaUL = document.getElementById('listaCiudades');
+            listaUL.innerHTML = ''; // Limpiar lista
+
+            for (const [ciudad, habitantes] of ciudadesMap.entries()) {
+                const li = document.createElement('li');
+                
+                // Aplicar color para 5 (rojo) y 6 (verde)
+                if (ciudad === ciudadDestacada) {
+                    li.style.color = color;
+                }
+
+                li.textContent = ciudad + ": " + habitantes.toLocaleString() + " hab.";
+                listaUL.appendChild(li);
+            }
+        }
+        
+        // 2. Contar ciudades
+        function contarCiudades() {
+            alert("Hay " + ciudadesMap.size + " ciudades en total.");
+        }
+
+        // 3. Borrar ciudad
+        function borrarCiudad() {
+            const nombre = document.getElementById('borrarNombre').value.trim();
+            if (ciudadesMap.delete(nombre)) {
+                renderizarLista();
+                alert("'" + nombre + "' eliminada.");
+            } else {
+                alert('Ciudad no encontrada.');
+            }
+            document.getElementById('borrarNombre').value = '';
+        }
+
+        // 4. Añadir ciudad
+        function anadirCiudad() {
+            const nombre = document.getElementById('anadirNombre').value.trim();
+            const habitantes = parseInt(document.getElementById('anadirHabitantes').value);
+
+            if (nombre && habitantes > 0) {
+                ciudadesMap.set(nombre, habitantes);
+                renderizarLista();
+            } else {
+                alert('Datos de ciudad inválidos.');
+            }
+            document.getElementById('anadirNombre').value = '';
+            document.getElementById('anadirHabitantes').value = '';
+        }
+
+        // 5 & 6. Ciudades extremas (Más/Menos habitantes)
+        function ciudadExtrema(tipo) {
+            if (ciudadesMap.size === 0) return;
+
+            let ciudadExtrema = '';
+            let valorExtremo;
+            let color;
+            let etiqueta; // Para el mensaje final
+
+            // A. Valores iniciales
+            if (tipo === 'max') {
+                valorExtremo = -1; // Cualquier habitante será mayor que -1
+                color = 'red';
+                etiqueta = 'MÁS';
+            } else { // tipo === 'min'
+                valorExtremo = Infinity; // Cualquier habitante será menor que este número
+                color = 'green';
+                etiqueta = 'MENOS';
+            }
+
+            // B. Encontrar la ciudad extrema
+            for (const [ciudad, habitantes] of ciudadesMap.entries()) {
+                if (tipo === 'max') {
+                    if (habitantes > valorExtremo) {
+                        valorExtremo = habitantes;
+                        ciudadExtrema = ciudad;
+                    }
+                } else {
+                    if (habitantes < valorExtremo) {
+                        valorExtremo = habitantes;
+                        ciudadExtrema = ciudad;
+                    }
+                }
+            }
+            
+            // 3. Renderizar y mostrar resultado
+            renderizarLista(color, ciudadExtrema); 
+            
+            alert("Ciudad con " + etiqueta + " habitantes: " + ciudadExtrema + " (" + valorExtremo.toLocaleString() + ").");
+        }
+
+        // Mostrar la lista inicial al cargar la página (1)
+        document.addEventListener('DOMContentLoaded', renderizarLista);
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostrar URL</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Mostrar URL</h1>
+    <p id="resultado"></p>
+
+  <script>
+    // Así obtenemos la URL de la página actual
+    const url = window.location.href;
+
+    document.getElementById("resultado").innerHTML = "La URL de esta página es: <a href=" + url + ">"+ url +"</a>";
+
+    </script>
+</body>
+</html>

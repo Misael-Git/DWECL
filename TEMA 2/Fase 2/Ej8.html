@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coincidir número</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Coincidir número</h1>
+    
+    <label for="numIn">Introduce un número</label>
+    <input type="number" id="numIn">
+
+    <button type="button" onclick="comprobar()">Comprobar</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        const numAleatorio = Math.floor(Math.random()*10)+1;
+
+        function comprobar() {
+            numIn = document.getElementById("numIn").value
+            if (numIn == numAleatorio) {
+                document.getElementById("resultado").innerHTML = "Correcto, tu número coincide con el número aleatorio: " + numAleatorio;
+            } else {
+                document.getElementById("resultado").innerHTML = "No es correcto, pues el número era " + numAleatorio;
+            }
+
+        }
+    </script>
+</body>
+</html>

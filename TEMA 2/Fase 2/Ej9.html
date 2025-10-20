@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuantos días hasta Navidad</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Días hasta la próxima Navidad</h2>
+    <h1 id="dias"></h1>
+
+    <p>Mientras llega, puede ver información sobre la navidad pulsando <a href="https://www.jw.org/es/enseñanzas-bíblicas/preguntas/qué-dice-la-biblia-acerca-de-la-navidad">aquí</a></p>
+
+    <script>
+        const hoy = new Date();
+        // Sacamos de la fecha el año
+        let año = hoy.getFullYear();
+
+        //  Calculamos la fecha con el año actual
+        let navidad = new Date(año, 11, 25);
+
+        // Si ya pasó la de este año, calculamos la del año siguiente
+        if (hoy > navidad) {
+            navidad = new Date(año + 1, 11, 25)
+        }
+
+        const diferencia = navidad - hoy;
+
+        // Está en milisegundos, así que hay que convertir a días, pasándolo primero a segundos, luego a minutos, a horas y por último a días (1 día = 1000 ms * 60 s * 60 min * 24 h)
+        const diasFaltantes = Math.ceil(diferencia / (1000 * 60 * 60 * 24));
+
+        document.getElementById("dias").innerHTML = diasFaltantes;
+    </script>
+</body>
+</html>

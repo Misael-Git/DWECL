@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proteger correo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Proteger correo</h1>
+    
+    <label for="cadena">Correo protegido:</label>
+    <input type="text" id="cadena">
+
+    <button type="button" onclick="extraer()">Proteger</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        function extraer() {
+            cadena = document.getElementById("cadena").value;
+            
+            //resultado = cadena.substring(3, [8])
+            
+            indexDominio = cadena.lastIndexOf("@");
+            dominio = cadena.substring(indexDominio);
+            principio = cadena.substring(0, [3])
+
+            document.getElementById("resultado").innerHTML = principio + "..." + dominio;
+
+        }
+    </script>
+</body>
+</html>

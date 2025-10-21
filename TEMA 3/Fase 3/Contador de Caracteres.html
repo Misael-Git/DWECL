@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extraer caracteres</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Extraer caracteres</h1>
+    
+    <label for="cadena">Introduce una palabra/frase:</label>
+    <input type="text" id="cadena">
+
+    <button type="button" onclick="extraer()">Extraer caracteres</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        function extraer() {
+            cadena = document.getElementById("cadena").value;
+            
+
+            caracteres = [cadena.split(' ')];
+
+            let contador = 0;
+            caracteres.forEach(caracter => {
+                contador = contador + 4;
+            });
+
+            document.getElementById("resultado").innerHTML = "Total de caracteres: " + contador;
+
+        }
+    </script>
+</body>
+</html>

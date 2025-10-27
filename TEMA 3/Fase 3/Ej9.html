@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Primera Letra en Mayúscula</title>
+</head>
+<body>
+    <h1>Primera Letra en Mayúscula</h1>
+    
+    <label for="cadena">Escribe una frase:</label>
+    <input type="text" id="cadena">
+
+    <button type="button" onclick="formatear()">Formatear texto</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        function formatear() {
+            let cadena = document.getElementById("cadena").value;
+            let palabras = cadena.split(' ');
+            let resultadoArray = [];
+
+            for (let i = 0; i < palabras.length; i++) {
+                let palabra = palabras[i];
+                
+                // Coge el primer carácter y lo pone en mayúscula
+                let primeraLetra = palabra.charAt(0).toUpperCase();
+                // Coge el resto de la palabra y la pone en minúscula
+                let resto = palabra.slice(1).toLowerCase();
+                    
+                resultadoArray.push(primeraLetra + resto);
+            }
+            
+            let resultadoFinal = resultadoArray.join(' ');
+            
+            document.getElementById("resultado").innerHTML = resultadoFinal;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos del Mes</title>
+</head>
+<body>
+    <h1>Datos del Mes (Nombre y Días)</h1>
+    
+    <label for="mesInput">Mes (1-12):</label>
+    <input type="number" id="mesInput" value="10" min="1" max="12">
+
+    <br><br>
+    <label for="anioInput">Año:</label>
+    <input type="number" id="anioInput" value="2025">
+    
+    <br><br>
+    <button type="button" onclick="obtenerDatos()">Mostrar Datos</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        function obtenerDatos() {
+            let mes = parseInt(document.getElementById("mesInput").value);
+            let anio = parseInt(document.getElementById("anioInput").value);
+
+            let nombreMes = "";
+            let numDias = 0;
+            let error = false;
+
+            switch (mes) {
+                case 1:
+                    nombreMes = "Enero";
+                    numDias = 31;
+                    break;
+                case 2:
+                    // Los años bisiestos son divisibles entre 4
+                    if (anio % 4 > 0) {
+                        numDias = 28;
+                    } else {
+                        numDias = 29;
+                    }
+                    nombreMes = "Febrero";
+                    break;
+                case 3:
+                    nombreMes = "Marzo";
+                    numDias = 31;
+                    break;
+                case 4:
+                    nombreMes = "Abril";
+                    numDias = 30;
+                    break;
+                case 5:
+                    nombreMes = "Mayo";
+                    numDias = 31;
+                    break;
+                case 6:
+                    nombreMes = "Junio";
+                    numDias = 30;
+                    break;
+                case 7:
+                    nombreMes = "Julio";
+                    numDias = 31;
+                    break;
+                case 8:
+                    nombreMes = "Agosto";
+                    numDias = 31;
+                    break;
+                case 9:
+                    nombreMes = "Septiembre";
+                    numDias = 30;
+                    break;
+                case 10:
+                    nombreMes = "Octubre";
+                    numDias = 31;
+                    break;
+                case 11:
+                    nombreMes = "Noviembre";
+                    numDias = 30;
+                    break;
+                case 12:
+                    nombreMes = "Diciembre";
+                    numDias = 31;
+                    break;
+                default:
+                    error =  true;
+            }
+
+            if (error) {
+                resultado = "Error";
+            } else {
+                resultado = "El mes es " + nombreMes + " y tiene " + numDias + " días.";
+            }
+
+            document.getElementById("resultado").innerHTML = resultado;
+        }
+    </script>
+</body>
+</html>

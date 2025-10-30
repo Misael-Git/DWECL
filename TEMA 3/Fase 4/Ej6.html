@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Número más alto</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Número más alto</h1>
+    
+    <label for="cadena">Números separados por comas:</label>
+    <input type="text" id="cadena">
+
+    <button type="button" onclick="sumar()">Sumar</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        function sumar() {
+            let cadena = document.getElementById("cadena").value;
+
+            let array = cadena.split(",");
+            
+            let mayor = -Infinity;
+            array.forEach(element => {
+
+                element = parseInt(element); // Peta si no añado esto, me dice que 2 es mayor a 1000 jaja
+
+                if (element > mayor) {
+                    mayor = element;
+                }
+            });
+
+            document.getElementById("resultado").innerHTML = mayor;
+        }
+    </script>
+</body>
+</html>

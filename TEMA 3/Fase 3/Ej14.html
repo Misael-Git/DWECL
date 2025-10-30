@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Insertar cadena en cadena</title>
+</head>
+<body>
+    <h1>Insertar cadena en cadena</h1>
+    
+    <label for="cadenaBase">Frase principal:</label>
+    <input type="text" id="cadenaBase" value="Estamos haciendo ejercicios.">
+
+    <br><br>
+    <label for="cadenaInsertar">Lo que quiero meter:</label>
+    <input type="text" id="cadenaInsertar" value="JavaScript">
+    
+    <br><br>
+    <label for="posicion">Posición:</label>
+    <input type="text" id="posicion" value="0"> 
+    
+    <br><br>
+    <button type="button" onclick="insertarCadena()">Insertar</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        function insertarCadena() {
+            
+            let cadenaBase = document.getElementById("cadenaBase").value;
+            let cadenaInsertar = document.getElementById("cadenaInsertar").value;
+            let posicion = document.getElementById("posicion").value;
+
+            // Mitad 1: desde el inicio hasta la posición
+            let parteInicio = cadenaBase.slice(0, posicion);
+            
+            // Mitad 2: desde la posición hasta el final
+            let parteFinal = cadenaBase.slice(posicion);
+            
+            let resultado = parteInicio + cadenaInsertar + parteFinal;
+            
+            document.getElementById("resultado").innerHTML = resultado;
+        }
+    </script>
+</body>
+</html>

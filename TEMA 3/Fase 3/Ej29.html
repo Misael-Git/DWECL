@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contar Subcadena</title>
+</head>
+<body>
+    <h1>Contar Apariciones de Subcadena</h1>
+    
+    <label for="cadenaPrincipal">Frase principal:</label>
+    <input type="text" id="cadenaPrincipal" value="El zorro marrón">
+
+    <br><br>
+    <label for="subcadena">Subcadena a buscar:</label>
+    <input type="text" id="subcadena" value="zorro">
+    
+    <br><br>
+    <button type="button" onclick="contarSubcadena()">Contar</button>
+
+    <p id="resultado"></p>
+
+    <script>
+
+        // Yil, este y el 18 son lo mismo noo?
+
+        function contarSubcadena() {
+            
+            let cadenaPrincipal = document.getElementById("cadenaPrincipal").value;
+            let subcadena = document.getElementById("subcadena").value;
+            
+            // Con este método, nos ahorramos los if.
+            // Lo que hacemos es dividir la frase por el valor que queramos, como si hicieramos un split por comas, pero por el valor que queramos contar.
+            // Y así, la longitud del array total es 1 más que la de array.length
+            let arrayTotal = cadenaPrincipal.split(subcadena);
+            
+            // Restamos el que sobra
+            let total = arrayTotal.length - 1;
+            
+            document.getElementById("resultado").innerHTML = "Se encontró " + total + " veces.";
+        }
+    </script>
+</body>
+</html>

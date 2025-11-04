@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elemento Más Frecuente</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Elemento Más Frecuente</h1>
+
+    <label for="cadena">Elementos separados por comas:</label>
+    <input type="text" id="cadena" value="a, b, a, c, a, b">
+
+    <button type="button" onclick="calcular()">Buscar Frecuente</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        function calcular() {
+            let cadena = document.getElementById("cadena").value;
+            let array = cadena.split(",").map(e => e.trim());
+            // Necesitamos el .map(e => e.trim()) para eliminar espacios en blanco
+            // Sino, al comparar "a" y " a", los consideraría diferentes
+
+            let conteos = {};
+            let maxFrecuencia = 0;
+            let masFrecuente = "";
+
+            // Para cada elemento, los vamos añadiendo al array de conteos y vamos sumando sus apariciones
+            array.forEach(elemento => {
+                // Aquí no podemos usar el +=1, pues puede no estar incializada
+                conteos[elemento] = (conteos[elemento] || 0) + 1; // Tenemos que usar el or 0
+
+                // Si supera la frecuencia máxima, actualizamos los valores
+                if (conteos[elemento] > maxFrecuencia) {
+                    maxFrecuencia = conteos[elemento];
+                    masFrecuente = elemento;
+                }
+            });
+
+            document.getElementById("resultado").innerHTML = "El elemento más frecuente es *" + masFrecuente + "* y sale " + maxFrecuencia + " veces";
+        }
+    </script>
+</body>
+
+</html>

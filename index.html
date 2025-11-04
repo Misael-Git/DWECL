@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +15,8 @@
             display: flex;
             flex-direction: column;
             height: 81vh;
-            overflow: hidden; /* Evitar el desplazamiento del body */
+            overflow: hidden;
+            /* Evitar el desplazamiento del body */
         }
 
         footer {
@@ -25,7 +27,8 @@
             z-index: -1;
         }
 
-        h1, h2 {
+        h1,
+        h2 {
             text-align: center;
             margin: 10px 0;
             z-index: 2;
@@ -61,8 +64,13 @@
         }
 
         @keyframes matrix-animation {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 100%; }
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 0 100%;
+            }
         }
 
         body::after {
@@ -72,17 +80,20 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: repeating-linear-gradient(
-                rgba(76, 0, 255, 0.2) 0 1px,
-                transparent 1px 20px
-            );
+            background: repeating-linear-gradient(rgba(76, 0, 255, 0.2) 0 1px,
+                    transparent 1px 20px);
             z-index: 0;
             animation: glow 3s alternate infinite;
         }
 
         @keyframes glow {
-            0% { opacity: 0.1; }
-            100% { opacity: 0,4; }
+            0% {
+                opacity: 0.1;
+            }
+
+            100% {
+                opacity: 0, 4;
+            }
         }
 
         /* Panel lateral */
@@ -97,15 +108,19 @@
             background-color: rgba(255, 255, 255, 0.05);
             z-index: 3;
             backdrop-filter: blur(10px);
-            overflow-y: auto; /* Habilitar desplazamiento vertical */
+            overflow-y: auto;
+            /* Habilitar desplazamiento vertical */
             transition-duration: 500ms;
-            -ms-overflow-style: none;  /* Para Internet Explorer y Edge */
-            scrollbar-width: none;  /* Para Firefox */
+            -ms-overflow-style: none;
+            /* Para Internet Explorer y Edge */
+            scrollbar-width: none;
+            /* Para Firefox */
         }
 
         /* Ocultar la barra de desplazamiento */
         aside::-webkit-scrollbar {
-            display: none; /* Para navegadores basados en WebKit (Chrome, Safari) */
+            display: none;
+            /* Para navegadores basados en WebKit (Chrome, Safari) */
         }
 
         aside:hover {
@@ -129,17 +144,23 @@
             bottom: 0;
             color: #fff;
             z-index: 2;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5); /* Sombra para un efecto de profundidad */
-            display: flex; /* Usar flexbox en el footer */
-            flex-direction: column; /* Colocar elementos en columna */
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+            /* Sombra para un efecto de profundidad */
+            display: flex;
+            /* Usar flexbox en el footer */
+            flex-direction: column;
+            /* Colocar elementos en columna */
             padding-left: 20%;
             padding-right: 20%;
         }
 
         .footer-content {
-            display: flex; /* Usar flexbox para alinear textarea y botón en una fila */
-            justify-content: center; /* Centrar horizontalmente */
-            margin-top: 10px; /* Espacio superior */
+            display: flex;
+            /* Usar flexbox para alinear textarea y botón en una fila */
+            justify-content: center;
+            /* Centrar horizontalmente */
+            margin-top: 10px;
+            /* Espacio superior */
         }
 
         footer h3 {
@@ -149,25 +170,38 @@
 
         button {
             padding: 10px 20px;
-            background-color: #82a3ff; /* Color de fondo del botón */
-            color: rgb(0, 0, 0); /* Color del texto del botón */
-            border: none; /* Sin borde */
-            border-radius: 5px; /* Bordes redondeados */
-            cursor: pointer; /* Cambia el cursor al pasar el ratón */
-            transition: background-color 0.3s; /* Transición suave */
+            background-color: #82a3ff;
+            /* Color de fondo del botón */
+            color: rgb(0, 0, 0);
+            /* Color del texto del botón */
+            border: none;
+            /* Sin borde */
+            border-radius: 5px;
+            /* Bordes redondeados */
+            cursor: pointer;
+            /* Cambia el cursor al pasar el ratón */
+            transition: background-color 0.3s;
+            /* Transición suave */
         }
 
         button:hover {
-            background-color: #c99fff; /* Color al pasar el ratón */
+            background-color: #c99fff;
+            /* Color al pasar el ratón */
         }
 
         textarea {
-            width: 70%; /* Ajustar el ancho del textarea */
-            margin-right: 10px; /* Espacio a la derecha del textarea */
-            padding: 10px; /* Espaciado interno */
-            border: none; /* Sin borde */
-            border-radius: 5px; /* Bordes redondeados */
-            resize: none; /* Evitar redimensionar */
+            width: 70%;
+            /* Ajustar el ancho del textarea */
+            margin-right: 10px;
+            /* Espacio a la derecha del textarea */
+            padding: 10px;
+            /* Espaciado interno */
+            border: none;
+            /* Sin borde */
+            border-radius: 5px;
+            /* Bordes redondeados */
+            resize: none;
+            /* Evitar redimensionar */
         }
 
         .exercise-list {
@@ -249,10 +283,12 @@
 
         iframe {
             width: 90%;
-            height: 670px; /* Aumentado el alto del iframe */
+            height: 670px;
+            /* Aumentado el alto del iframe */
             border: 2px solid #ddd;
             border-radius: 10px;
-            margin: 20px 5%; /* Añadido margen izquierdo y derecho */
+            margin: 20px 5%;
+            /* Añadido margen izquierdo y derecho */
             background: white;
             z-index: 2;
         }
@@ -263,57 +299,126 @@
             border: white;
             mask-border: radial-gradient(transparent, rgb(255, 255, 255) 100%);
         }
-
     </style>
 </head>
+
 <body>
     <aside>
         <h3>Ejercicios</h3>
         <div class="exercise-list" id="tema1Exercises">
-            <h4 class="toggle" onclick="toggleVisibility('tema1ExercisesContent')">Ejercicios Tema 1 | Repaso HTML, CSS y JS</h4>
+            <h4 class="toggle" onclick="toggleVisibility('tema1ExercisesContent')">Ejercicios Tema 1 | Repaso HTML, CSS
+                y JS</h4>
             <div class="content" id="tema1ExercisesContent">
                 <ul>
-                    <li><a href="TEMA 1/Ejercicios Introduccion/Ej1.1.html" target="content-frame" onclick="updateTitle('Ej1.1')">Ej1.1</a><span class="share-btn" onclick="window.open('TEMA 1/Ejercicios Introduccion/Ej1.1.html', '_blank')">🔗</span></li>
-                    <li><a href="TEMA 1/Ejercicios Introduccion/Ej1.2.html" target="content-frame" onclick="updateTitle('Ej1.2')">Ej1.2</a><span class="share-btn" onclick="window.open('TEMA 1/Ejercicios Introduccion/Ej1.2.html', '_blank')">🔗</span></li>
-                    <li><a href="TEMA 1/Ejercicios Introduccion/Ej1.3.html" target="content-frame" onclick="updateTitle('Ej1.3')">Ej1.3</a><span class="share-btn" onclick="window.open('TEMA 1/Ejercicios Introduccion/Ej1.3.html', '_blank')">🔗</span></li>
-                    <li><a href="TEMA 1/Ejercicios Introduccion/Ej1.4.html" target="content-frame" onclick="updateTitle('Ej1.4')">Ej1.4</a><span class="share-btn" onclick="window.open('TEMA 1/Ejercicios Introduccion/Ej1.4.html', '_blank')">🔗</span></li>
-                    <li><a href="TEMA 1/Ejercicios Introduccion/Ej1.5.html" target="content-frame" onclick="updateTitle('Ej1.5')">Ej1.5</a><span class="share-btn" onclick="window.open('TEMA 1/Ejercicios Introduccion/Ej1.5.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 1/Ejercicios Introduccion/Ej1.1.html" target="content-frame"
+                            onclick="updateTitle('Ej1.1')">Ej1.1</a><span class="share-btn"
+                            onclick="window.open('TEMA 1/Ejercicios Introduccion/Ej1.1.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 1/Ejercicios Introduccion/Ej1.2.html" target="content-frame"
+                            onclick="updateTitle('Ej1.2')">Ej1.2</a><span class="share-btn"
+                            onclick="window.open('TEMA 1/Ejercicios Introduccion/Ej1.2.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 1/Ejercicios Introduccion/Ej1.3.html" target="content-frame"
+                            onclick="updateTitle('Ej1.3')">Ej1.3</a><span class="share-btn"
+                            onclick="window.open('TEMA 1/Ejercicios Introduccion/Ej1.3.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 1/Ejercicios Introduccion/Ej1.4.html" target="content-frame"
+                            onclick="updateTitle('Ej1.4')">Ej1.4</a><span class="share-btn"
+                            onclick="window.open('TEMA 1/Ejercicios Introduccion/Ej1.4.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 1/Ejercicios Introduccion/Ej1.5.html" target="content-frame"
+                            onclick="updateTitle('Ej1.5')">Ej1.5</a><span class="share-btn"
+                            onclick="window.open('TEMA 1/Ejercicios Introduccion/Ej1.5.html', '_blank')">🔗</span></li>
                 </ul>
             </div>
         </div>
 
         <div class="exercise-list" id="tema2Exercises">
-            <h4 class="toggle" onclick="toggleVisibility('tema2ExercisesContent')">Ejercicios Tema 2 | Manejo y Sintaxis de JavaScript</h4>
+            <h4 class="toggle" onclick="toggleVisibility('tema2ExercisesContent')">Ejercicios Tema 2 | Manejo y Sintaxis
+                de JavaScript</h4>
             <div class="content" id="tema2ExercisesContent">
                 <ul>
-                    <li><a href="TEMA 2\Flecha y map\Ej1.html" target="content-frame" onclick="updateTitle('Ej1')">Ej1</a><span class="share-btn" onclick="window.open('TEMA 2\Flecha y map\Ej1.html', '_blank')">🔗</span></li>
-                    <li><a href="TEMA 2\Flecha y map\Ej2.html" target="content-frame" onclick="updateTitle('Ej2')">Ej2</a><span class="share-btn" onclick="window.open('TEMA 2\Flecha y map\Ej2.html', '_blank')">🔗</span></li>
-                    <li><a href="TEMA 2\Flecha y map\Ej3.html" target="content-frame" onclick="updateTitle('Ej3')">Ej3</a><span class="share-btn" onclick="window.open('TEMA 2\Flecha y map\Ej3.html', '_blank')">🔗</span></li>
-                    <li><a href="TEMA 2\Fase 2\Ej8.html" target="content-frame" onclick="updateTitle('Ej8')">Ej8</a><span class="share-btn" onclick="window.open('TEMA 2\Fase 2\Ej8.html', '_blank')">🔗</span></li>
-                    <li><a href="TEMA 2\Fase 2\Ej9.html" target="content-frame" onclick="updateTitle('Ej9')">Ej9</a><span class="share-btn" onclick="window.open('TEMA 2\Fase 2\Ej9.html', '_blank')">🔗</span></li>
-                    <li><a href="TEMA 2\Fase 2\Ej11.html" target="content-frame" onclick="updateTitle('Ej11')">Ej11</a><span class="share-btn" onclick="window.open('TEMA 2\Fase 2\Ej11.html', '_blank')">🔗</span></li>
-                    <li><a href="TEMA 2\Fase 2\Ej12.html" target="content-frame" onclick="updateTitle('Ej12')">Ej12</a><span class="share-btn" onclick="window.open('TEMA 2\Fase 2\Ej12.html', '_blank')">🔗</span></li>
-                    <li><a href="TEMA 2\Fase 2\Ej28a.html" target="content-frame" onclick="updateTitle('Ej28a')">Ej28a</a><span class="share-btn" onclick="window.open('TEMA 2\Fase 2\Ej28a.html', '_blank')">🔗</span></li>
-                    <li><a href="TEMA 2\Fase 2\Ej28b.html" target="content-frame" onclick="updateTitle('Ej28b')">Ej28b</a><span class="share-btn" onclick="window.open('TEMA 2\Fase 2\Ej28b.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 2\Flecha y map\Ej1.html" target="content-frame"
+                            onclick="updateTitle('Ej1')">Ej1</a><span class="share-btn"
+                            onclick="window.open('TEMA 2\Flecha y map\Ej1.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 2\Flecha y map\Ej2.html" target="content-frame"
+                            onclick="updateTitle('Ej2')">Ej2</a><span class="share-btn"
+                            onclick="window.open('TEMA 2\Flecha y map\Ej2.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 2\Flecha y map\Ej3.html" target="content-frame"
+                            onclick="updateTitle('Ej3')">Ej3</a><span class="share-btn"
+                            onclick="window.open('TEMA 2\Flecha y map\Ej3.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 2\Fase 2\Ej8.html" target="content-frame"
+                            onclick="updateTitle('Ej8')">Ej8</a><span class="share-btn"
+                            onclick="window.open('TEMA 2\Fase 2\Ej8.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 2\Fase 2\Ej9.html" target="content-frame"
+                            onclick="updateTitle('Ej9')">Ej9</a><span class="share-btn"
+                            onclick="window.open('TEMA 2\Fase 2\Ej9.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 2\Fase 2\Ej11.html" target="content-frame"
+                            onclick="updateTitle('Ej11')">Ej11</a><span class="share-btn"
+                            onclick="window.open('TEMA 2\Fase 2\Ej11.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 2\Fase 2\Ej12.html" target="content-frame"
+                            onclick="updateTitle('Ej12')">Ej12</a><span class="share-btn"
+                            onclick="window.open('TEMA 2\Fase 2\Ej12.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 2\Fase 2\Ej28a.html" target="content-frame"
+                            onclick="updateTitle('Ej28a')">Ej28a</a><span class="share-btn"
+                            onclick="window.open('TEMA 2\Fase 2\Ej28a.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 2\Fase 2\Ej28b.html" target="content-frame"
+                            onclick="updateTitle('Ej28b')">Ej28b</a><span class="share-btn"
+                            onclick="window.open('TEMA 2\Fase 2\Ej28b.html', '_blank')">🔗</span></li>
                 </ul>
             </div>
         </div>
 
         <div class="exercise-list" id="tema3Exercises">
-            <h4 class="toggle" onclick="toggleVisibility('tema3ExercisesContent')">Ejercicios Tema 3 | Objetos predefinidos</h4>
+            <h4 class="toggle" onclick="toggleVisibility('tema3ExercisesContent')">Ejercicios Tema 3 | Objetos
+                predefinidos</h4>
             <div class="content" id="tema3ExercisesContent">
                 <ul>
-                    <li><a href="TEMA 3\Fase 3\Contador de Caracteres.html" target="content-frame" onclick="updateTitle('Contador de Carácteres')">Contador de Carácteres</a><span class="share-btn" onclick="window.open('TEMA 3\Fase 3\Contador de Caracteres.html', '_blank')">🔗</span></li>
-                    <li><a href="TEMA 3\Fase 3\Ej4.html" target="content-frame" onclick="updateTitle('Ej4')">Ej4</a><span class="share-btn" onclick="window.open('TEMA 3\Fase 3\Ej4.html', '_blank')">🔗</span></li>
-                    <li><a href="TEMA 3\Fase 3\Ej6.html" target="content-frame" onclick="updateTitle('Ej6')">Ej6</a><span class="share-btn" onclick="window.open('TEMA 3\Fase 3\Ej6.html', '_blank')">🔗</span></li>
-                    <li><a href="TEMA 3\Fase 3\Ej9.html" target="content-frame" onclick="updateTitle('Ej9')">Ej9</a><span class="share-btn" onclick="window.open('TEMA 3\Fase 3\Ej9.html', '_blank')">🔗</span></li>
-                    <li><a href="TEMA 3\Fase 3\Ej14.html" target="content-frame" onclick="updateTitle('Ej14')">Ej14</a><span class="share-btn" onclick="window.open('TEMA 3\Fase 3\Ej14.html', '_blank')">🔗</span></li>
-                    <li><a href="TEMA 3\Fase 3\Ej18.html" target="content-frame" onclick="updateTitle('Ej18')">Ej18</a><span class="share-btn" onclick="window.open('TEMA 3\Fase 3\Ej18.html', '_blank')">🔗</span></li>
-                    <li><a href="TEMA 3\Fase 3\Ej29.html" target="content-frame" onclick="updateTitle('Ej29')">Ej29</a><span class="share-btn" onclick="window.open('TEMA 3\Fase 3\Ej29.html', '_blank')">🔗</span></li>
-                    <li><a href="TEMA 3\Fase 4\Ej4a.html" target="content-frame" onclick="updateTitle('Ej4a')">Ej4a</a><span class="share-btn" onclick="window.open('TEMA 3\Fase 4\Ej4a.html', '_blank')">🔗</span></li>
-                    <li><a href="TEMA 3\Fase 4\Ej4b.html" target="content-frame" onclick="updateTitle('Ej4b')">Ej4b</a><span class="share-btn" onclick="window.open('TEMA 3\Fase 4\Ej4b.html', '_blank')">🔗</span></li>
-                    <li><a href="TEMA 3\Fase 4\Ej6.html" target="content-frame" onclick="updateTitle('Ej6')">Ej6</a><span class="share-btn" onclick="window.open('TEMA 3\Fase 4\Ej6.html', '_blank')">🔗</span></li>
-
+                    <li><a href="TEMA 3\Fase 3\Contador de Caracteres.html" target="content-frame"
+                            onclick="updateTitle('Contador de Carácteres')">Contador de Carácteres</a><span
+                            class="share-btn"
+                            onclick="window.open('TEMA 3\Fase 3\Contador de Caracteres.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 3\Fase 3\Ej4.html" target="content-frame"
+                            onclick="updateTitle('Ej4')">Ej4</a><span class="share-btn"
+                            onclick="window.open('TEMA 3\Fase 3\Ej4.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 3\Fase 3\Ej6.html" target="content-frame"
+                            onclick="updateTitle('Ej6')">Ej6</a><span class="share-btn"
+                            onclick="window.open('TEMA 3\Fase 3\Ej6.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 3\Fase 3\Ej9.html" target="content-frame"
+                            onclick="updateTitle('Ej9')">Ej9</a><span class="share-btn"
+                            onclick="window.open('TEMA 3\Fase 3\Ej9.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 3\Fase 3\Ej14.html" target="content-frame"
+                            onclick="updateTitle('Ej14')">Ej14</a><span class="share-btn"
+                            onclick="window.open('TEMA 3\Fase 3\Ej14.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 3\Fase 3\Ej18.html" target="content-frame"
+                            onclick="updateTitle('Ej18')">Ej18</a><span class="share-btn"
+                            onclick="window.open('TEMA 3\Fase 3\Ej18.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 3\Fase 3\Ej29.html" target="content-frame"
+                            onclick="updateTitle('Ej29')">Ej29</a><span class="share-btn"
+                            onclick="window.open('TEMA 3\Fase 3\Ej29.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 3\Fase 4\Ej4a.html" target="content-frame"
+                            onclick="updateTitle('Ej4a')">Ej4a</a><span class="share-btn"
+                            onclick="window.open('TEMA 3\Fase 4\Ej4a.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 3\Fase 4\Ej4b.html" target="content-frame"
+                            onclick="updateTitle('Ej4b')">Ej4b</a><span class="share-btn"
+                            onclick="window.open('TEMA 3\Fase 4\Ej4b.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 3\Fase 4\Ej6.html" target="content-frame"
+                            onclick="updateTitle('Ej6')">Ej6</a><span class="share-btn"
+                            onclick="window.open('TEMA 3\Fase 4\Ej6.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 3\Fase 3\Ej5.html" target="content-frame"
+                            onclick="updateTitle('Ej5')">Ej5</a><span class="share-btn"
+                            onclick="window.open('TEMA 3\Fase 3\Ej5.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 3\Fase 3\Ej8a.html" target="content-frame"
+                            onclick="updateTitle('Ej8a')">Ej8a</a><span class="share-btn"
+                            onclick="window.open('TEMA 3\Fase 3\Ej8a.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 3\Fase 3\Ej8b.html" target="content-frame"
+                            onclick="updateTitle('Ej8b')">Ej8b</a><span class="share-btn"
+                            onclick="window.open('TEMA 3\Fase 3\Ej8b.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 3\Fase 3\Ej18.html" target="content-frame"
+                            onclick="updateTitle('Ej18')">Ej18</a><span class="share-btn"
+                            onclick="window.open('TEMA 3\Fase 3\Ej18.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 3\Fase 3\Ej31.html" target="content-frame"
+                            onclick="updateTitle('Ej31')">Ej31</a><span class="share-btn"
+                            onclick="window.open('TEMA 3\Fase 3\Ej31.html', '_blank')">🔗</span></li>
+                    <li><a href="TEMA 3\Fase 3\Ej31b.html" target="content-frame"
+                            onclick="updateTitle('Ej31b')">Ej31b</a><span class="share-btn"
+                            onclick="window.open('TEMA 3\Fase 3\Ej31b.html', '_blank')">🔗</span></li>
                 </ul>
             </div>
         </div>
@@ -345,13 +450,13 @@
         </div>
     </footer>
 -->
-    
+
     <script>
         function updateTitle(title) {
             document.getElementById('fileTitle').innerText = title;
         }
-        
-        document.getElementById('mailtoLink').onclick = function() {
+
+        document.getElementById('mailtoLink').onclick = function () {
             const suggestion = document.getElementById('suggestionText').value.trim(); // Obtener el texto del textarea
             const email = "mbaroje1506@g.educaand.es"; // Cambia esto por tu dirección de correo
             const subject = "Sugerencia"; // Asunto del correo
@@ -375,4 +480,5 @@
         }
     </script>
 </body>
+
 </html>

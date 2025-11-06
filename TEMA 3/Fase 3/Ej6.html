@@ -19,12 +19,15 @@
     <script>
         function extraer() {
             cadena = document.getElementById("cadena").value;
-            
-            //resultado = cadena.substring(3, [8])
-            
+                        
             indexDominio = cadena.lastIndexOf("@");
             dominio = cadena.substring(indexDominio);
-            principio = cadena.substring(0, [3])
+
+            let indexPrincipio = 3
+            if (indexDominio < 4) {
+                indexPrincipio = indexDominio -1;
+            }
+            principio = cadena.substring(0, [indexPrincipio])
 
             document.getElementById("resultado").innerHTML = principio + "..." + dominio;
 

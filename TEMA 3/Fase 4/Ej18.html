@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producto de Array</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Producto de Valores en una Matriz</h1>
+
+    <label for="arrayProducto">Números separados por comas:</label>
+    <input type="text" id="cadena" value="2, 3, 4, 5">
+
+    <button type="button" onclick="calcularPoducto()">Calcular Producto</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        function calcularPoducto() {
+            let cadena = document.getElementById("cadena").value.split(",");
+            //let array = cadena.split(","); // Lo pasamos a un array
+
+            // Inicializamos el resultado a 1 para no multiplicarlo por 0
+            let resultado = 1;
+
+            for (let i = 0; i < cadena.length; i++) {
+                resultado *= cadena[i];
+            }
+
+            document.getElementById("resultado").innerHTML = resultado;
+        }
+    </script>
+</body>
+
+</html>

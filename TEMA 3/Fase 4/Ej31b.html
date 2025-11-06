@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Elemento</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Eliminar Elemento de Matriz</h1>
+
+    <label for="cadena">Array (separados por comas):</label>
+    <input type="text" id="cadena" value="2, 4, 5, 9">
+
+    <br>
+    <label for="elementoAEliminar">Elemento a Eliminar:</label>
+    <input type="text" id="elementoAEliminar" value="5">
+
+    <br><br>
+    <button type="button" onclick="eliminarElemento()">Eliminar</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        function eliminarElemento() {
+            let cadena = document.getElementById("cadena").value;
+            let array = cadena.split(",").map(e => e.trim());
+            // Pasamos los datos a un array y eliminamos espacios en blanco
+
+            let elemento = document.getElementById("elementoAEliminar").value.trim();
+
+            let arrayNuevo = [];
+
+            for (let i = 0; i < array.length; i++) {
+                // Si el elemento actual NO es el que queremos eliminar, pasamos el valor al nuevo array
+                if (array[i] !== elemento) {
+                    arrayNuevo.push(array[i]);
+                }
+            }
+
+            let resultado = arrayNuevo.join(', ');
+
+            document.getElementById("resultado").innerHTML = resultado;
+        }
+    </script>
+</body>
+
+</html>

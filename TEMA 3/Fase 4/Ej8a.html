@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diferencia de Fechas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Diferencia de Fechas en Días</h1>
+
+    <label for="fecha1">Fecha 1:</label>
+    <input type="date" id="fecha1" value="2025-01-01">
+
+    <br>
+    <label for="fecha2">Fecha 2:</label>
+    <input type="date" id="fecha2" value="2025-01-31">
+
+    <br><br>
+    <button type="button" onclick="calcularDiferencia()">Calcular Diferencia</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        function calcularDiferencia() {
+            let fecha1 = new Date(document.getElementById("fecha1").value);
+            let fecha2 = new Date(document.getElementById("fecha2").value);
+
+            // Al recoger las fechas como Date, podemos restarlas directamente 
+            let diferenciaMs = fecha2 - fecha1;
+            let diferenciaDias = diferenciaMs / (1000 * 60 * 60 * 24); // Lo pasamos a segundos, minutos, horasa y días
+
+            document.getElementById("resultado").innerHTML = diferenciaDias + " días.";
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambio de color</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Cambia color según evento</h1>
+    <div id="mensaje">Mueve el ratón, pulsa clic o una tecla.</div>
+
+    <script>
+        const mensaje = document.getElementById('mensaje');
+
+        document.addEventListener('mousedown', () => {
+            mensaje.style.backgroundColor = '#FFFF00';
+        });
+
+        document.addEventListener('keydown', () => {
+            mensaje.style.backgroundColor = '#CCE6FF';
+        });
+
+        document.addEventListener('mousemove', () => {
+            mensaje.style.backgroundColor = 'white';
+        });
+    </script>
+
+</body>
+
+</html>

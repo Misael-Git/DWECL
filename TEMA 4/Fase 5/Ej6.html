@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tecla pulsada</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Muestra la tecla pulsada</h1>
+    <p id="teclaInfo">Presiona cualquier tecla...</p>
+
+    <script>
+        document.addEventListener('keydown', (e) => {
+            let texto = "Tecla: " + e.key;
+            if (e.altKey) texto += " + Alt";
+            if (e.shiftKey) texto += " + Shift";
+            if (e.ctrlKey) texto += " + Ctrl";
+            document.getElementById('teclaInfo').innerHTML = texto;
+        });
+    </script>
+
+</body>
+
+</html>

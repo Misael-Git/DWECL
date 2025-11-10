@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagen con click</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        img {
+            width: 300px;
+            height: auto;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Imagen con click</h1>
+
+    <img id="imagen" src="img/BB.jpg">
+
+    <script>
+        const img = document.getElementById('imagen');
+        const imgNormal = img.src; // Sacamos el src de la imagen inicial
+        const imgPulsada = 'img/Fire.jpg';
+
+        img.addEventListener('mousedown', () => {
+            img.src = imgPulsada;
+        });
+
+        img.addEventListener('mouseup', () => {
+            img.src = imgNormal;
+        });
+
+        // Con mouseleave nos aseguramos de que si el usuario
+        // pulsa y arrastra fuera de la imagen, la imagen vuelva a ser la normal
+        img.addEventListener('mouseleave', () => {
+            img.src = imgNormal;
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detectar botón ratón</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Detecta clic izquierdo y derecho</h1>
+    <p id="mensaje">Pulsa un botón del ratón</p>
+
+    <script>
+        document.addEventListener('mousedown', (e) => {
+            if (e.button === 0) {
+                document.getElementById("mensaje").innerHTML = "Botón IZQUIERDO pulsado";
+            } else if (e.button === 2) {
+                document.getElementById("mensaje").innerHTML = "Botón DERECHO pulsado";
+            }
+        });
+    </script>
+
+</body>
+
+</html>

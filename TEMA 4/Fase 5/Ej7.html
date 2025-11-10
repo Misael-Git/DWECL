@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mover caja</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #caja {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Mueve la caja con flechas o teclado numérico (4,6,8,2)</h1>
+    <div id="caja"></div>
+
+    <script>
+        const caja = document.getElementById('caja'); // Recogemos la caja para darle estilo luego (movimiento)
+        let x = 100;
+        let y = 100;
+        const movimiento = 10; // Este valor es los píxeles que se moverá la caja
+
+        document.addEventListener('keydown', (e) => {
+            switch (e.key) {
+                case 'ArrowUp':
+                case '8':
+                    y -= movimiento;
+                    break;
+                case 'ArrowDown':
+                case '2':
+                    y += movimiento;
+                    break;
+                case 'ArrowLeft':
+                case '4':
+                    x -= movimiento;
+                    break;
+                case 'ArrowRight':
+                case '6':
+                    x += movimiento;
+                    break;
+                default:
+                    return;
+            }
+
+            // Limitamos el movimiento dentro de la ventana. El -50 es el tamaño de la caja
+            // Aquí tomamos el valor mínimo entre el límite de la ventana y la posición calculada,
+            // y luego el máximo entre 0 y ese valor, para que ni se pase ni no llegue
+            x = Math.max(0, Math.min(window.innerWidth - 50, x));
+            y = Math.max(0, Math.min(window.innerHeight - 50, y));
+
+            // Damos la ubicación a la caja 
+            caja.style.left = x + 'px';
+            caja.style.top = y + 'px';
+
+        });
+    </script>
+
+</body>
+
+</html>

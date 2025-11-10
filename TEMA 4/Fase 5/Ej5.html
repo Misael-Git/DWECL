@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostrar URL imagen</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        img {
+            width: 300px;
+            height: auto;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Pasa el ratón sobre las imágenes</h1>
+
+    <a class="img" href="https://www.google.com"><img src="img/Fire.jpg" alt="Google"></a>
+    <a class="img" href="https://www.github.com"><img src="img/BB.jpg" alt="GitHub"></a>
+
+    <br><br>
+    <p id="url"></p>
+
+    <script>
+        // Seleccionamos todos los elementos con clase 'img'
+        const imagenes = document.getElementsByClassName('img');
+
+        // Recorremos cada uno y le añadimos el evento
+        for (let i = 0; i < imagenes.length; i++) {
+            imagenes[i].addEventListener('mouseover', function () { // En una función flecha, el this sacaría el contexto global, no el del elemento, y da error
+                document.getElementById('url').innerHTML = this.href; // Mostramos el href del seleccionado
+            });
+        }
+    </script>
+
+</body>
+
+</html>

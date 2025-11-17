@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3</title>
+</head>
+<body>
+    <h1>Ejercicio 3</h1>
+
+    <label for="valores">Introduce 6 valores: 2 booleanos (true, false), 2 numéricos y 2 cadenas de carácteres (entre comillas)</label>
+    <input type="text" name="valores" id="valores">
+
+    <br><br>
+    <button onclick="comprobar()">Comprobar</button>
+
+    <p id="resultado"></p>
+    <p id="aritmetica"></p>
+
+    <script>
+        function comprobar() {
+            // Recogemos los valores
+            let valores = document.getElementById("valores").value;
+
+            let valoresSeparados = valores.split(","); // Separamos los valores y los metemos en valoresSeparados
+            let booleanos = [];
+            let numeros = [];
+            let cadenas = [];
+
+            if (valoresSeparados.length != 6) { // Comprobamos si la longitud no es 6
+                document.getElementById("resultado").innerHTML = "No hay 6 valores, hay " + valoresSeparados.length;
+            } else {
+
+                let contador = 0;
+                // Comprobamos si alguno es null
+                valoresSeparados.forEach(valor => {
+                    contador++; // Para dar el error
+
+                    if (valor == null) { // Comprobamos si hay algún valor nulo
+                        document.getElementById("resultado").innerHTML = "El valor " + contador + " es null, vuelve a introducir todos los valores";
+                    } else if (valor == "false" || valor == "true") {
+                        booleanos.push(valor); // Lo añadimos al array de booleanos
+                    } else if (valor.charAt(1) == '"') { // Si empieza por comillas es una cadena
+                        cadenas.push(valor);
+                    } else {
+                        numeros.push(valor);
+                    }
+
+                    resumen = "Booleanos: " + booleanos + ", números: " + numeros + ", textos: " + cadenas;
+                    document.getElementById("resultado").innerHTML = resumen;
+
+                    // No se por qué no me deja comprobar un valor llamado false
+
+                    sumaAritmetica = numeros[0] + numeros[1]
+                    restaAritmetica = numeros[0] - numeros[1]
+                    document.getElementById("aritmetica").innerHTML = "Suma aritmetica: " + sumaAritmetica + ", resta aritmética: " + restaAritmetica;
+
+
+            });
+            }
+
+            
+
+        }
+
+    </script>
+</body>
+</html>

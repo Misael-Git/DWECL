@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2</title>
+</head>
+<body>
+    <h1>Ejercicio 2</h1>
+
+    <button onclick="pruebaA()">Módulos almacenados</button>
+    <button onclick="pruebaB()">Mostrar contenido</button>
+    <button onclick="pruebaC()">Abreviaturas de módulos</button>
+    <button onclick="pruebaD()">Nombre completo módulos</button>
+    <button onclick="pruebaEG()">¿Está DAW?</button>
+    <p id="resultado"></p>
+    <ul id="resultadoLista"></ul>
+
+    <script>
+        // Creamos la estructura de map solo con las siglas de los módulos
+        const modulos = new Map([
+            ["DIWEB"],
+            ["DWECL"],
+            ["DWESE"],
+            ["PI"],
+            ["DAW"]
+        ]);
+
+        // Añadimos la información después de crear la estructura (nombres completos)
+        modulos.set("DIWEB", "Diseño de Interfaces Web");
+        modulos.set("DWECL", "Diseño de Interfaces Web");
+        modulos.set("DWESE", "Desarrollo Web");
+        modulos.set("PI", "Proyecto Intermodular");
+        modulos.set("DAW", "Desarrollo de Aplicaciones Web");
+
+
+        // LIMPIAR
+        function limpiar() {
+            // Función para limpiar los datos
+            document.getElementById("resultado").innerHTML = "";
+            document.getElementById("resultadoLista").innerHTML = "";
+        }
+        
+        // A) Mostrar cuántos módulos hay almacenados
+        function pruebaA() {
+            limpiar();
+
+            a = modulos.size; // La longitud
+            document.getElementById("resultado").innerHTML = a
+        }
+
+
+        // B) Mostrar el contenido de la estructura
+        // Creamos un for que recorra las entradas de modulos con sus campos siglas y nombres
+        function pruebaB() {
+            limpiar();
+
+            for (const [siglas, nombres] of modulos.entries()) {
+                const elementoLi = document.createElement('li'); // Creamos el li, para que se añada a la lista
+                elementoLi.textContent = siglas + ": " + nombres; // Añadimos el texto al elemento li que hemos creado
+                document.getElementById("resultadoLista").appendChild(elementoLi); // Hacemos append para que salga después del anterior elemento
+            }
+        }
+
+
+        // C) Devolver la abreviatura de los módulos
+        // Los devolveré como el anterior ejercicio, en modo lista
+        function pruebaC() {
+            limpiar();
+
+            for (const [siglas] of modulos.entries()) {
+                const elementoLi = document.createElement('li'); // Creamos el li, para que se añada a la lista
+                elementoLi.textContent = siglas; // Añadimos el texto al elemento li que hemos creado
+                document.getElementById("resultadoLista").appendChild(elementoLi); // Hacemos append para que salga después del anterior elemento
+            }
+        }
+
+
+        // D) Devolver el nombre completo de los módulos
+        // Igual que los otros
+        function pruebaD() {
+            limpiar();
+
+            for (const [x, nombres] of modulos.entries()) {
+                const elementoLi = document.createElement('li'); // Creamos el li, para que se añada a la lista
+                elementoLi.textContent = nombres; // Añadimos el texto al elemento li que hemos creado
+                document.getElementById("resultadoLista").appendChild(elementoLi); // Hacemos append para que salga después del anterior elemento
+            }
+        }
+
+
+        // E) y G) pruebaEG
+        function pruebaEG() {
+            limpiar();
+
+                if (modulos.delete("DAW")) { // Intentamos eliminarlo, y si no da error mostramos que estaba y que fue eliminado
+                    alert("El módulo DAW estaba, y ha sido eliminado");
+                    // Mostramos los datos de nuevo:
+                    pruebaB();
+                } else { // Si da error porque no estaba, mostramos que no se ha encontrado
+                    alert("El módulo DAW no existe");
+                }
+        }
+
+
+    </script>
+</body>
+</html>

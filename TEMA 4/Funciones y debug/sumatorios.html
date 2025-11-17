@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumatorio</title>
+</head>
+<body>
+    <label for="a">Número a</label>
+    <input type="text" id="a">
+    
+    <label for="n">Número n</label>
+    <input type="number" id="n">
+    
+    <label for="b">Número b</label>
+    <input type="number" id="b">
+    
+    <br><br>
+    <button onclick="sumatorio1()">Suma a, n veces</button>
+    <button onclick="sumatorio2()">Sumas a + n, b sumas</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        function sumatorio1() {
+            let a = document.getElementById("a").value;
+            let n = document.getElementById("n").value;
+            let resultado;
+
+            if (isNaN(a)) {
+                resultado = "";
+            } else {
+                resultado = 0;
+                a = Number(a);
+            }
+            
+            while (n > 0) {
+                resultado += a;
+                n--;
+            }
+
+            document.getElementById("resultado").innerHTML = resultado;
+        }
+
+        function sumatorio2() {
+            let a = document.getElementById("a").value;
+            let n = document.getElementById("n").value;
+            let b = document.getElementById("b").value;
+            let resultado;
+
+            if (isNaN(a)) {
+                resultado = "";
+            } else {
+                resultado = 0;
+                a = Number(a);
+            }
+            
+            while (n > 0) {
+                resultado += a;
+                n--;
+            }
+
+            document.getElementById("resultado").innerHTML = resultado;
+        }
+    </script>
+</body>
+</html>

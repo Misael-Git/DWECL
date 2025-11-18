@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Operar</h1>
+
+    <label for="num1">Número 1</label>
+    <input type="number" id="num1" value="2">
+    <br>
+
+    <label for="num2">Número 2</label>
+    <input type="number" id="num2" value="3">
+    <br>
+
+    <label for="operacion">Operación</label>
+    <select id="operacion">
+        <option value="suma">Suma</option>
+        <option value="resta">Resta</option>
+        <option value="multiplicacion">Multiplicación</option>
+        <option value="sumamul">Suma + Multiplicación</option>
+    </select>
+    <br>
+    
+    <button onclick="ejecutar()">Ejecutar</button>
+    <p id="resultado"></p>
+
+    <script>
+        // Funciones flecha de operación
+        const suma = (a, b) => a + b;
+        const resta = (a, b) => a - b;
+        const multiplicacion = (a, b) => a * b;
+        const sumamul = (a, b) => suma(a, b) + multiplicacion(a, b);
+
+        // Función operar.
+        function operar(num1, num2, operacionFunc) {
+            return operacionFunc(num1, num2); // Calculamos el resultado llamando a la función flecha correspondiente, dándole los valores
+        }
+
+        // Ejecución simple con getElementById
+        function ejecutar() {
+            const n1 = parseFloat(document.getElementById('num1').value);
+            const n2 = parseFloat(document.getElementById('num2').value);
+            const operacionSeleccionada = document.getElementById('operacion').value;
+            let func;
+
+            // Seleccionar la función según la opción
+            switch (operacionSeleccionada) {
+                case 'suma': func = suma; break;
+                case 'resta': func = resta; break;
+                case 'multiplicacion': func = multiplicacion; break;
+                case 'sumamul': func = sumamul; break;
+                default: return document.getElementById('resultado').textContent = "Error: Operación no válida.";
+            }
+
+            document.getElementById('resultado').textContent = "Resultado: " + operar(n1, n2, func);
+        }
+    </script>
+</body>
+</html>

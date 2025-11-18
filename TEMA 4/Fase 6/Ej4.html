@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>4. listarArchivos (Simple)</title>
+</head>
+<body>
+    <h1>4. Listar Archivos</h1>
+    <p>Objeto del sistema de archivos definido.</p>
+    <button onclick="ejecutar()">Listar</button>
+    <p id="resultado"></p>
+
+    <script>
+        // Objeto solicitado
+        const fs = {
+            carpeta1: {
+                archivo1: "contenido1",
+                archivo2: "contenido2",
+                subcarpeta: { archivo3: "contenido3" }
+            },
+            carpeta2: { archivo4: "contenido4" }
+        };
+
+        // Función solicitada: Forma recursiva concisa
+        function listarArchivos(obj) {
+            let nombres = [];
+            for (const clave in obj) {
+                const valor = obj[clave];
+                if (typeof valor === 'object' && valor !== null) {
+                    // Es carpeta: llamamos recursivamente y concatenamos
+                    nombres = nombres.concat(listarArchivos(valor));
+                } else {
+                    // Es archivo: añadimos la clave
+                    nombres.push(clave);
+                }
+            }
+            return nombres;
+        }
+
+        // Ejecución simple
+        function ejecutar() {
+            const archivos = listarArchivos(fs);
+            document.getElementById('resultado').textContent = 
+                "Archivos: [" + archivos.join(", ") + "]";
+        }
+    </script>
+</body>
+</html>

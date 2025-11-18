@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>5. permutar (Simple)</title>
+</head>
+<body>
+    <h1>5. Permutar Array</h1>
+    <p>Array: [1, 2, 3]</p>
+    <button onclick="ejecutar()">Permutar</button>
+    <pre id="resultado"></pre>
+
+    <script>
+        // Array de ejemplo
+        const arrayOriginal = [1, 2, 3];
+
+        // Función solicitada (la implementación recursiva más estándar y concisa)
+        function permutar(arr) {
+            const resultados = [];
+            
+            function generar(arrActual, restantes) {
+                if (restantes.length === 0) {
+                    resultados.push(arrActual);
+                    return;
+                }
+
+                for (let i = 0; i < restantes.length; i++) {
+                    const nuevoActual = arrActual.concat(restantes[i]);
+                    // Creamos un nuevo array de restantes sin el elemento elegido
+                    const nuevosRestantes = restantes.slice(0, i).concat(restantes.slice(i + 1));
+                    
+                    generar(nuevoActual, nuevosRestantes);
+                }
+            }
+            
+            generar([], arr);
+            return resultados;
+        }
+
+        // Ejecución simple
+        function ejecutar() {
+            const permutaciones = permutar(arrayOriginal);
+            document.getElementById('resultado').textContent = JSON.stringify(permutaciones, null, 2);
+        }
+    </script>
+</body>
+</html>

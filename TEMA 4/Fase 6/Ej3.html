@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplanar Array</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Aplanar Array (Recursiva)</h1>
+
+    <label for="arrayInput">Array de Ejemplo (Fijo)</label>
+    <input type="text" id="arrayInput" value="[1, [2, [3, 4]], 5, [6]]">
+    <br>
+    
+    <button onclick="ejecutar()">Ejecutar</button>
+    <p id="resultado"></p>
+
+    <script>
+        function aplanar(array) {
+            return array.flat(Infinity); // Literalmente deja plano el array hasta el infinito jaja
+        }
+
+        // Ejecución simple
+        function ejecutar() {
+            const inputString = document.getElementById('arrayInput').value;
+
+            const arrayAnidado = JSON.parse(inputString); // Tenemos que recoger el input como un json para que funcione
+
+            const resultadoPlano = aplanar(arrayAnidado);
+            document.getElementById('resultado').textContent = "Resultado: [" + resultadoPlano.join(", ") + "]";
+        }
+    </script>
+</body>
+</html>

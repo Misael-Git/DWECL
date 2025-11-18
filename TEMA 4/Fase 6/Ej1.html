@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Usuario</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Crear Usuario</h1>
+
+    <label for="nombre">Nombre</label>
+    <input type="text" id="nombre" value="">
+    <br>
+
+    <label for="edad">Edad</label>
+    <input type="number" id="edad" value="">
+    <br>
+
+    <label for="pais">País</label>
+    <input type="text" id="pais" value="">
+    <br>
+    
+    <button onclick="ejecutar()">Ejecutar</button>
+    <p id="resultado"></p>
+
+    <script>
+        // Función solicitada: Código más reducido.
+        function crearUsuario({ nombre, edad, pais }) {
+            const n = nombre || "desconocido";
+            const e = edad || "desconocido";
+            const p = pais || "desconocido";
+            return `${n}, ${e} años, ${p}`;
+        }
+
+        // Ejecución simple con getElementById
+        function ejecutar() {
+            const datos = {
+                nombre: document.getElementById('nombre').value,
+                edad: document.getElementById('edad').value,
+                pais: document.getElementById('pais').value
+            };
+            document.getElementById('resultado').textContent = crearUsuario(datos);
+        }
+    </script>
+</body>
+</html>

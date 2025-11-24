@@ -15,31 +15,32 @@
 
         // Función solicitada (la implementación recursiva más estándar y concisa)
         function permutar(arr) {
-            const resultados = [];
+            const resultados = []; // creamos el array vacío de resultados
             
             function generar(arrActual, restantes) {
-                if (restantes.length === 0) {
-                    resultados.push(arrActual);
-                    return;
-                }
-
                 for (let i = 0; i < restantes.length; i++) {
                     const nuevoActual = arrActual.concat(restantes[i]);
-                    // Creamos un nuevo array de restantes sin el elemento elegido
-                    const nuevosRestantes = restantes.slice(0, i).concat(restantes.slice(i + 1));
+                    // Creamos un una copia del array restantes, pero omitiendo el elemento que se acaba de elegir
+                    const nuevosRestantes = restantes.slice(0, i).concat(restantes.slice(i + 1)); // Corta el array en 2 partes, y los une de nuevo
                     
                     generar(nuevoActual, nuevosRestantes);
                 }
+
+                if (restantes.length === 0) {
+                    resultados.push(arrActual); // Pasamos el valor al array cuando no queden restantes
+                    return;
+                }
             }
             
-            generar([], arr);
+            generar([], arr); // El array actual lo pasamos como vacío al comenzar, y el de restantes con todo
             return resultados;
         }
 
-        // Ejecución simple
         function ejecutar() {
             const permutaciones = permutar(arrayOriginal);
-            document.getElementById('resultado').textContent = JSON.stringify(permutaciones, null, 2);
+            // Formateamos el resultado:
+            const outputFormateado = JSON.stringify(permutaciones, null, 0);
+            document.getElementById('resultado').innerHTML = outputFormateado;
         }
     </script>
 </body>

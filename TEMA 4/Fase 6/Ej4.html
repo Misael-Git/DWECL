@@ -10,7 +10,7 @@
     <p id="resultado"></p>
 
     <script>
-        // Objeto solicitado
+        // Objeto fs
         const fs = {
             carpeta1: {
                 archivo1: "contenido1",
@@ -20,27 +20,25 @@
             carpeta2: { archivo4: "contenido4" }
         };
 
-        // Función solicitada: Forma recursiva concisa
+        // Función de listar archivos
         function listarArchivos(obj) {
             let nombres = [];
             for (const clave in obj) {
-                const valor = obj[clave];
-                if (typeof valor === 'object' && valor !== null) {
-                    // Es carpeta: llamamos recursivamente y concatenamos
+                const valor = obj[clave]; // Pasamos a la constante valor la clave del objeto
+                if (typeof valor === 'object') {
+                    // Si es carpeta, llamamos recursivamente y concatenamos
                     nombres = nombres.concat(listarArchivos(valor));
                 } else {
-                    // Es archivo: añadimos la clave
+                    // Si es archivo, añadimos la clave al array nombres
                     nombres.push(clave);
                 }
             }
             return nombres;
         }
 
-        // Ejecución simple
         function ejecutar() {
             const archivos = listarArchivos(fs);
-            document.getElementById('resultado').textContent = 
-                "Archivos: [" + archivos.join(", ") + "]";
+            document.getElementById('resultado').innerHTML = "Archivos: " + archivos.join(", ") + "";
         }
     </script>
 </body>

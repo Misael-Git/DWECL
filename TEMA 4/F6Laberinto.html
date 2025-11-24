@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego del laberinto</title>
+</head>
+<body>
+    <h1>Juego del laberinto</h1>
+    <p id="pruebas">a</p>
+
+    <script>
+
+            let sComprobada = false;
+          //  let primeraVez = true;
+            const lab = [
+                ["S", " ", "X", " "],
+                ["X", " ", "X", " "],
+                [" ", " ", " ", " "],
+                ["X", "X", " ", "F"]
+                ];
+            let x = 0;
+            let y = 0;
+            let visitado = [
+                [" ", " ", " ", " "],
+                [" ", " ", " ", " "],
+                [" ", " ", " ", " "],
+                [" ", " ", " ", " "]
+                ];
+            
+            resolverLaberinto(lab, x, y, visitado)
+
+        function resolverLaberinto(lab, x, y, visitado) {
+                
+            if (lab[x][y])
+                // Detecta qué hay en la posición actual
+                if (lab[x][y] == " ") { return false }
+                    // Si es S o no es una pared, comprueba los que tiene arriba, abajo, izquierda o derecha, excepto si ya han sido comprobados
+                
+
+                    document.getElementById("pruebas").innerHTML = "Hola x: " + x + " y: " + y;
+                } else { // Si es una pared, sale del programa
+
+                if 
+
+                }
+                resolverLaberinto(lab, x, y, visitado)
+            }
+
+    </script>
+</body>
+</html>

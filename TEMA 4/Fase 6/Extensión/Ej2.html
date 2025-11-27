@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 2: Función que Devuelve Otra Función</title>
+</head>
+<body>
+    <h1>Ejercicio 2: Función que Devuelve Otra Función (Clausura)</h1>
+    <p>Revisa la **Consola del Navegador (F12)** para ver los resultados.</p>
+    <script>
+        // La función externa: recibe el número fijo
+        function crearSumador(numeroFijo) {
+            // La función interna: recibe el número a sumar
+            return function(otroNumero) {
+                // Esta función SIEMPRE recuerda el 'numeroFijo'
+                return numeroFijo + otroNumero;
+            };
+        }
+
+        // --- Uso de la función ---
+
+        // Creamos una nueva función que siempre suma 5
+        const sumarCinco = crearSumador(5);
+
+        // Creamos otra función que siempre suma 100
+        const sumarCien = crearSumador(100);
+
+        // Usamos la primera función
+        console.log("20 + 5:", sumarCinco(20)); // Output: 25
+
+        // Usamos la segunda función
+        console.log("50 + 100:", sumarCien(50)); // Output: 150
+    </script>
+</body>
+</html>

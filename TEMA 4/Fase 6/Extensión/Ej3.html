@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 3: Expresión de Función</title>
+</head>
+<body>
+    <h1>Ejercicio 3: Expresión de Función (Validador)</h1>
+    <p>Revisa la **Consola del Navegador (F12)** para ver los resultados.</p>
+    <script>
+        // Expresión de función (Función Flecha)
+        // La función está asignada a la variable 'validarMasDeDiez'
+        const validarMasDeDiez = (cadena) => {
+            // La propiedad .length da el número de caracteres
+            return cadena.length > 10;
+        };
+
+        // --- Uso de la función ---
+
+        let textoCorto = "Hola"; // Longitud 4
+        let textoLargo = "Este es un texto con más de diez caracteres"; // Longitud 42
+
+        console.log(`'${textoCorto}' tiene más de 10 caracteres:`, validarMasDeDiez(textoCorto)); // Output: false
+
+        console.log(`'${textoLargo.substring(0, 15)}...' tiene más de 10 caracteres:`, validarMasDeDiez(textoLargo)); // Output: true
+    </script>
+</body>
+</html>

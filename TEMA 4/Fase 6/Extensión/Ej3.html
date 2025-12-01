@@ -2,27 +2,43 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ejercicio 3: Expresión de Función</title>
+    <title>Validacion +10 carácteres</title>
+    <link rel="stylesheet" href="../style.css"> 
 </head>
 <body>
-    <h1>Ejercicio 3: Expresión de Función (Validador)</h1>
-    <p>Revisa la **Consola del Navegador (F12)** para ver los resultados.</p>
+    <h1>Validacion +10 carácteres</h1>
+    
+    <form id="validadorForm">
+        <label for="cadena">Introduce una cadena:</label>
+        <input type="text" id="cadena" value="¡Hola mundo!" required><br><br>
+        
+        <button type="button" onclick="validar()">Validar</button>
+    </form>
+    
+    <h3>Resultado de la Validación:</h3>
+    <p id="resultado"></p>
+    
     <script>
-        // Expresión de función (Función Flecha)
-        // La función está asignada a la variable 'validarMasDeDiez'
-        const validarMasDeDiez = (cadena) => {
-            // La propiedad .length da el número de caracteres
+        const esMayorDeDiez = function(cadena) {
             return cadena.length > 10;
         };
 
-        // --- Uso de la función ---
+        function validar() {
+            const cadena = document.getElementById('cadena').value;
+            
+            const comprobar = esMayorDeDiez(cadena)
 
-        let textoCorto = "Hola"; // Longitud 4
-        let textoLargo = "Este es un texto con más de diez caracteres"; // Longitud 42
+            let resultado = "";
+            
+            if (comprobar) {
+                resultado = "es válida (más de 10)";
+            } else {
+                resultado = "es inválida (no más de 10)";
+            }
 
-        console.log(`'${textoCorto}' tiene más de 10 caracteres:`, validarMasDeDiez(textoCorto)); // Output: false
-
-        console.log(`'${textoLargo.substring(0, 15)}...' tiene más de 10 caracteres:`, validarMasDeDiez(textoLargo)); // Output: true
+            // Mostrar el resultado
+            document.getElementById("resultado").innerHTML = "La cadena tiene " + cadena.length + " caracteres, así que "  + resultado;
+        }
     </script>
 </body>
 </html>

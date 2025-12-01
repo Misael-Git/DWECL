@@ -2,31 +2,27 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ejercicio 4: Declaración a Expresión</title>
+    <title>Declaración a Expresión de Función</title>
+    <link rel="stylesheet" href="../style.css"> 
 </head>
 <body>
-    <h1>Ejercicio 4: Declaración a Expresión de Función</h1>
-    <p>Revisa la **Consola del Navegador (F12)** para ver los resultados.</p>
+    <h1>Declaración a Expresión de Función</h1>
+    
+    <button type="button" onclick="mostrarSaludo()">Mostrar Saludo</button>
+    
+    <h3>Resultado:</h3>
+    <p id="resultado"></p>
+    
     <script>
-        // --- Código Original (Declaración de Función) ---
-        function greetOriginal() {
-            return "Hola";
-        }
-
-        // --- Código Convertido (Expresión de Función) ---
-        // Se usa 'const' para la variable
-        const greet = function() {
+        function greet() {
             return "Hola";
         };
 
-        // O, usando la forma moderna de Función Flecha:
-        const greetFlecha = () => "Hola";
-
-        // --- Uso de las funciones ---
-
-        console.log("Original:", greetOriginal()); // Output: Hola
-        console.log("Expresión:", greet());       // Output: Hola
-        console.log("Flecha:", greetFlecha());     // Output: Hola
+        function mostrarSaludo() {
+            const saludo = greet(); 
+            
+            document.getElementById("resultado").innerHTML = saludo;
+        }
     </script>
 </body>
 </html>

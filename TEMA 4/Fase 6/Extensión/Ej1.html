@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Usuario</title>
+    <title>Operaciones Simples con Callback</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -16,14 +16,14 @@
         <label for="b">Número B:</label>
         <input type="number" id="b" value="5" required><br><br>
         
-        <label for="op">Operación:</label>
-        <select id="op" required>
+        <label for="operacion">Operación:</label>
+        <select id="operacion" required>
             <option value="sumar">Suma</option>
             <option value="restar">Resta</option>
             <option value="multiplicar">Multiplicación</option>
         </select><br><br>
         
-        <button type="submit">Calcular</button>
+        <button type="button" onclick="ejecutar()">Calcular</button>
     </form>
     
     <h2>Resultado:</h2>
@@ -40,33 +40,25 @@
             return callback(a, b);
         }
 
-        // Formulario
-        const form = document.getElementById('operacionForm');
-
-        // Mapeo de la selección del usuario a la función real
+        // Pasamos lo que el usuario elige a las funciones reales de sumar, restar y multiplicar
         const callbacks = {
             'sumar': sumar,
             'restar': restar,
             'multiplicar': multiplicar
         };
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
+        function ejecutar() {
 
-            // 1. Obtener los valores del input
+            // Obtener los valores del input
             const numA = parseFloat(document.getElementById('a').value);
             const numB = parseFloat(document.getElementById('b').value);
-            const operacionSeleccionada = document.getElementById('op').value;
-            
-            // Obtener la función (callback)
-            const callbackFunc = callbacks[operacionSeleccionada];
+            const callbackFunc = callbacks[document.getElementById('operacion').value]; // Le asignamos a callbackFunc el valor del callback que queremos
             
             // Realizar el cálculo usando la función operar()
             const resultado = operar(numA, numB, callbackFunc);
 
-            // Mostrar el resultado
-            document.getElementById('resultado').innerHTML = "El resultado de la operación es: " + resultado;
-        });
+            document.getElementById('resultado').innerHTML = resultado;
+        }
     </script>
 </body>
 </html>

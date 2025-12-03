@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 2 - Recursividad</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2>Ejercicio 2: Sumar Hasta N (Recursividad)</h2>
+    <p>Calcula la suma de todos los enteros positivos desde 1 hasta N.</p>
+
+    <form id="formEjercicio2">
+        <label for="numeroN">Número N:</label>
+        <input type="number" id="numeroN" value="5" min="0" required>
+        <button type="button" onclick="ejecutarEjercicio2()">Calcular</button>
+    </form>
+
+    <h3>Resultado:</h3>
+    <div id="resultado"></div>
+
+    <script>
+        function sumarHasta(n) {
+            // Si n es menor o igual a 0, la suma es 0.
+            if (n <= 0) {
+                return 0;
+            }
+
+            return n + sumarHasta(n - 1);
+        }
+
+        function ejecutarEjercicio2() {
+            const n = parseInt(document.getElementById('numeroN').value);
+
+            if (isNaN(n)) {
+                document.getElementById('resultado').innerHTML = "Por favor, introduce un número válido.";
+                return;
+            }
+
+            const resultadoCalculo = sumarHasta(n);
+
+            document.getElementById('resultado').innerHTML = "La suma desde 1 hasta " + n + " es: " + resultadoCalculo;
+        }
+    </script>
+</body>
+
+</html>

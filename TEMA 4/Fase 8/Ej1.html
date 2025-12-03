@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 1 - Arrays y caracteres</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos específicos si son necesarios */
+    </style>
+</head>
+
+<body>
+    <h2>Ejercicio 1: Capitalizar y Contar Vocales</h2>
+
+    <form id="formEjercicio1">
+        <label for="palabras">Palabras:</label>
+        <input type="text" id="palabras" value="hola, mUndo, árbol, PIrrAmiDe">
+        <button type="button" onclick="ejecutarEjercicio1()">Calcular</button>
+    </form>
+
+    <h3>Resultado:</h3>
+    <div id="resultado"></div>
+
+    <script>
+        function capitalizarYContarVocales(words) {
+            let totalVocales = 0;
+            const palabrasCapitalizadas = [];
+
+            const vocales = 'aeiouáéíóú';
+
+            for (const word of words) {
+                if (word.length === 0) {
+                    palabrasCapitalizadas.push("");
+                    continue;
+                }
+
+                // 1. Capitalizar
+                const lowerWord = word.toLowerCase();
+                const capitalizada = lowerWord.charAt(0).toUpperCase() + lowerWord.slice(1);
+                palabrasCapitalizadas.push(capitalizada);
+
+                // 2. Contar vocales
+                for (const char of capitalizada.toLowerCase()) {
+                    if (vocales.includes(char)) {
+                        totalVocales++;
+                    }
+                }
+            }
+
+            return {
+                palabras: palabrasCapitalizadas,
+                totalVocales: totalVocales
+            };
+        }
+
+        function ejecutarEjercicio1() {
+            const entradaTexto = document.getElementById('palabras').value;
+            // Limpiar y separar las palabras
+            const palabrasArray = entradaTexto.split(',').map(word => word.trim()).filter(word => word.length > 0);
+
+            const resultadoObjeto = capitalizarYContarVocales(palabrasArray);
+
+            const resultadoJSON = JSON.stringify(resultadoObjeto, null, 2);
+
+            document.getElementById('resultado').innerHTML = `<pre>${resultadoJSON}</pre>`;
+        }
+    </script>
+</body>
+
+</html>

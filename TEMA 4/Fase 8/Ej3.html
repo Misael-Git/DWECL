@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 3 - Funciones anónimas</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos específicos si son necesarios */
+    </style>
+</head>
+
+<body>
+    <h2>Ejercicio 3: Filtrar y Transformar (Arrow Functions)</h2>
+    <p>El código filtra números pares y los eleva al cuadrado.</p>
+
+    <form id="formEjercicio3">
+        <label for="arrayNumeros">Array de Números (separados por coma):</label>
+        <input type="text" id="arrayNumeros" value="1, 2, 3, 4, 5, 6" size="40" required>
+        <button type="button" onclick="ejecutarEjercicio3()">Ejecutar</button>
+    </form>
+
+    <h3>Resultado:</h3>
+    <div id="resultado"></div>
+
+    <script>
+        function filtrarYTransformar(arr, filtro, transformacion) {
+            // 1. Filtrar el array usando la función 'filtro'
+            const filtrado = arr.filter(filtro);
+
+            // 2. Transformar los elementos resultantes usando la función 'transformacion'
+            const transformado = filtrado.map(transformacion);
+
+            return transformado;
+        }
+
+        function ejecutarEjercicio3() {
+            const entradaTexto = document.getElementById('arrayNumeros').value;
+            const arrNumeros = entradaTexto.split(',').map(item => parseInt(item.trim())).filter(n => !isNaN(n));
+
+            // Definición de las funciones anónimas (Arrow Functions)
+            const filtroPares = n => n % 2 === 0;
+            const transformacionCuadrado = n => n * n;
+
+            const resultadoCalculo = filtrarYTransformar(arrNumeros, filtroPares, transformacionCuadrado);
+
+            document.getElementById('resultado').innerHTML = resultadoCalculo.join(', ');
+        }
+    </script>
+</body>
+
+</html>

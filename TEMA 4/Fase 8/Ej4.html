@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 4 - Callbacks y Asincronía</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2>Ejercicio 4: Callbacks y Asincronía</h2>
+    <p>Simula el procesamiento de tareas asíncronas. La salida en la consola del navegador mostrará el orden de
+        finalización.</p>
+
+    <form id="formEjercicio4">
+        <p>Tareas (ID y Duración en ms):</p>
+        <textarea id="tareasInput" rows="5" cols="50">
+[
+    { "id": "A", "duracion": 300 }, 
+    { "id": "B", "duracion": 100 },
+    { "id": "C", "duracion": 200 }
+]
+        </textarea>
+        <button type="button" onclick="ejecutarEjercicio4()">Procesar Tareas</button>
+    </form>
+
+    <h3>Resultado Final:</h3>
+    <div id="resultado"></div>
+    <p> (Ver consola para el orden de finalización de cada tarea)</p>
+
+    <script>
+        function procesarTareas(tareas, callbackFinal) {
+            const idsCompletados = [];
+            let tareasPendientes = tareas.length;
+
+            if (tareasPendientes === 0) {
+                callbackFinal(idsCompletados);
+                return;
+            }
+
+            for (const tarea of tareas) {
+                setTimeout(() => {
+                    // Callback en línea: imprimir la tarea completada
+                    console.log(`Tarea ${tarea.id} completada`);
+
+                    idsCompletados.push(tarea.id);
+                    tareasPendientes--;
+
+                    // Llamar al callback final cuando todas hayan terminado
+                    if (tareasPendientes === 0) {
+                        callbackFinal(idsCompletados);
+                    }
+                }, tarea.duracion);
+            }
+        }
+
+        function ejecutarEjercicio4() {
+            const inputTareas = document.getElementById('tareasInput').value;
+            let tareas = JSON.parse(inputTareas);
+
+            document.getElementById('resultado').innerHTML = "Procesando...";
+
+            const callbackFinal = (resultado) => {
+                // Escribir el resultado final en el div 'resultado'
+                document.getElementById('resultado').innerHTML = `Orden de finalización: <strong>[${resultado.join(', ')}]</strong>`;
+            };
+
+            // Ejecutar la función principal
+            procesarTareas(tareas, callbackFinal);
+        }
+    </script>
+</body>
+
+</html>

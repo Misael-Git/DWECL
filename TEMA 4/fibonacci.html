@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculador Fibonacci</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Calculador Fibonacci</h1>
+
+    <label for="posicion">Posición</label>
+    <input type="text" id="posicion">
+
+    <button type="button" onclick="calcularFibonacci()">Calcular Fibonacci</button>
+
+    <h4 id="resultado"></h4>
+
+    <script>
+        let resultado;
+        let anterior;
+        let cont;
+        let obj;
+
+        function calcularFibonacci() {
+            resultado = 1;
+            anterior = 0;
+            cont = 1;
+            obj = Number(document.getElementById("posicion").value);
+            obj -=1; // Le restamos uno para que empiece desde el 0 -> 0, 1, 1, 2, 3, 5,...
+
+            document.getElementById("resultado").innerHTML = fibonacci();
+        }
+
+        function fibonacci() {
+            temp = anterior;
+            anterior = resultado;
+            resultado += temp;
+
+            if (cont == obj) {
+                return resultado;
+            }
+            cont++;34
+
+            return fibonacci()
+        }
+
+
+    </script>
+</body>
+</html>

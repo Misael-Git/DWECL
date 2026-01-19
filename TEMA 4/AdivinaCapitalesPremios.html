@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Juego de Capitales con Premios</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .contenedor {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        input {
+            padding: 8px;
+            width: 80%;
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 8px 15px;
+            cursor: pointer;
+            background: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .pista {
+            font-size: 24px;
+            letter-spacing: 5px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .mensaje {
+            margin: 15px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="contenedor">
+        <h1>Adivina la Capital (Con Premios)</h1>
+
+        <div id="seccion-entrada">
+            <p id="instruccion">Introduce la capital 1 de 6 (mín. 5 letras):</p>
+            <input type="text" id="input-capital" placeholder="Nombre de la capital">
+            <button onclick="guardarCapital()">Guardar</button>
+            <p id="error-msg" class="error"></p>
+        </div>
+
+        <div id="seccion-juego" style="display:none;">
+            <p>¡Intenta adivinar la palabra!</p>
+            <div id="display-pista" class="pista"></div>
+            <input type="text" id="input-intento" placeholder="¿Qué ciudad es?">
+            <button onclick="comprobarIntento()">Adivinar</button>
+            <p id="resultado-msg" class="mensaje"></p>
+        </div>
+    </div>
+
+    <div class="contenedor">
+        <h3>Explicación de los cambios</h3>
+        <p>Partiendo del código de <a href="AdivinaCapitales.html">AdivinaCapitales.html</a>, he cambiado:</p>
+        <ul>
+            <li>Contador de intentos <code>let intentos = 0</code></li>
+            <li>Nueva lógica en comprobarIntento(), donde se incrementa el contador de intentos con
+                <code>intentos++</code>, y donde se comprueba qué intento es, para asignar el premio.
+            </li>
+            <li>Si es victoria, se muestra el último premio asignado.</li>
+        </ul>
+    </div>
+
+    <script>
+        let listaCapitales = [];
+        let capitalSeleccionada = "";
+        let letrasReveladas = 0;
+        let intentos = 0;
+
+        function guardarCapital() {
+            let input = document.getElementById("input-capital");
+            let error = document.getElementById("error-msg");
+            let valor = input.value.trim();
+
+            if (valor.length < 5) {
+                error.innerText = "Error: Mínimo 5 caracteres.";
+                return;
+            }
+
+            error.innerText = "";
+            listaCapitales.push(valor.toLowerCase());
+            input.value = "";
+
+            if (listaCapitales.length < 6) {
+                document.getElementById("instruccion").innerText = "Introduce la capital " + (listaCapitales.length + 1) + " de 6:";
+            } else {
+                iniciarJuego();
+            }
+        }
+
+        function iniciarJuego() {
+            document.getElementById("seccion-entrada").style.display = "none";
+            document.getElementById("seccion-juego").style.display = "block";
+
+            let indiceAzar = Math.floor(Math.random() * listaCapitales.length);
+            capitalSeleccionada = listaCapitales[indiceAzar];
+
+            actualizarPista();
+        }
+
+        function actualizarPista() {
+            let texto = "";
+            for (let i = 0; i < capitalSeleccionada.length; i++) {
+                if (i < letrasReveladas) {
+                    texto += capitalSeleccionada[i] + " ";
+                } else {
+                    texto += "_ ";
+                }
+            }
+            document.getElementById("display-pista").innerText = texto;
+        }
+
+        function comprobarIntento() {
+            let intento = document.getElementById("input-intento").value.trim().toLowerCase();
+            let msg = document.getElementById("resultado-msg");
+
+            if (!intento) return;
+
+            intentos++;
+
+            if (intento === capitalSeleccionada) {
+                let premio = "0€";
+                if (intentos === 1) premio = "500€";
+                else if (intentos === 2) premio = "300€";
+                else if (intentos === 3) premio = "100€";
+
+                msg.innerText = "¡HAS GANADO! Premio: " + premio + ". Es " + capitalSeleccionada.toUpperCase();
+                msg.style.color = "green";
+                finalizar();
+            } else {
+                letrasReveladas++;
+                actualizarPista();
+                msg.innerText = "¡Fallo! Una pista más.";
+                msg.style.color = "orange";
+
+                if (letrasReveladas >= capitalSeleccionada.length) {
+                    msg.innerText = "HAS PERDIDO. La palabra era: " + capitalSeleccionada.toUpperCase();
+                    msg.style.color = "red";
+                    finalizar();
+                }
+            }
+            document.getElementById("input-intento").value = "";
+        }
+
+        function finalizar() {
+            document.getElementById("input-intento").disabled = true;
+            document.querySelector("#seccion-juego button").disabled = true;
+        }
+    </script>
+
+</body>
+
+</html>

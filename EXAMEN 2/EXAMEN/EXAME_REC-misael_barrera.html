@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen temas 4 y 5 - Misael Barrera</title>
+
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: rgb(25, 25, 31);
+            padding: 10%;
+            padding-top: 2%;
+            color: rgb(223, 223, 223);
+        }
+
+        div {
+            background: rgb(39, 39, 54);
+            padding: 5%;
+            border-radius: 8px;
+            margin-bottom: 5%;
+            transition-duration: 200ms;
+            cursor:pointer;
+        }
+
+        div:hover {
+            transition-duration: 200ms;
+            padding-left: 6%;
+        }
+
+        button {
+            cursor:pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Examen Recuperación Temas 4 y 5 - Misael Barrera</h1>
+
+    <div>
+        <h2>Ejercicio 1: Sintaxis de Funciones 1,5p</h2>
+
+        <label for="a">Número 1</label>
+        <input type="number" name="a" id="a" value="20">
+        
+        <br>
+        <label for="a">Número 2</label>
+        <input type="number" name="b" id="b" value="4">
+
+        <br>
+        <button type="button" onclick="ejercicio1()">Ejecutar</button>
+
+        <p id="resultado1"></p>
+    </div>
+    
+    <div>
+        <h2>Ejercicio 2: Manipulación de Arrays (Filtro y Transformación) 2p</h2>
+
+        <label for="array">Array de palabras (separadas por comas)</label>
+        <input type="text" name="array" id="array" value="casa, revolucion, sol, elefante, luz, teclado">
+
+        <br>
+        <button type="button" onclick="ejercicio2()">Ejecutar</button>
+
+        <p id="resultado2"></p>
+    </div>
+
+    <div>
+        <h2>Ejercicio 3: Lógica de Cadenas (El Generador de Pistas) 2,5p</h2>
+
+        <label for="palabra">Palabra</label>
+        <input type="text" name="palabra" id="palabra" value="estacionar">
+        
+        <br>
+        <label for="cantidadLetras">Cantidad de letras</label>
+        <input type="number" name="cantidadLetras" id="cantidadLetras" value="4">
+
+        <br>
+        <button type="button" onclick="ejercicio3()">Ejecutar</button>
+
+        <p id="resultado3"></p>
+    </div>
+
+    <div>
+        <h2>Ejercicio 4: Recursividad I (Suma de Array) 2p</h2>
+
+        <label for="numeros">Array de enteros</label>
+        <input type="text" name="numeros" id="numeros" value="1, 5, 7, 2, 4">
+        
+        <br>
+        <button type="button" onclick="ejercicio4()">Ejecutar</button>
+
+        <p id="resultado4"></p>
+    </div>
+    
+    <script>
+// EJERCICIO 1
+
+    function ejercicio1() {
+        // Sacamos los datos
+        let a = document.getElementById("a").value;
+        let b = document.getElementById("b").value;
+
+        // Las 2 funciones:
+        const multiplicar = (a,b) => {
+            return a*b;
+        }
+
+        const dividir = (a,b) => {
+            return a/b;
+        }
+
+        // Mostramos el resultado
+        document.getElementById("resultado1").innerHTML = `${a} x ${b} = ${multiplicar(a,b)} ${"<br>"} ${a} / ${b} = ${dividir(a,b)}`;
+    }
+
+// EJERCICIO 2
+
+    function ejercicio2() {
+        // Sacamos los datos
+        let array = document.getElementById("array").value.split(",");
+        let arrayFiltrado;
+
+        // Función de filtrado y transformación
+        function filtrar(array) {
+            arrayFiltrado = array.filter(palabra => palabra.length > 5);
+            let arrayMayus = arrayFiltrado.map(palabra => palabra.toUpperCase());
+            
+            return arrayMayus;
+        }
+
+        // Mostramos el resultado
+        document.getElementById("resultado2").innerHTML = filtrar(array);
+    }
+
+// EJERCICIO 3
+
+    function ejercicio3() {
+        // Sacamos los datos
+        let palabra = document.getElementById("palabra").value;
+        let cantidadLetras = document.getElementById("cantidadLetras").value;
+
+        // Función que genera la pista
+        function generarPista(palabra, cantidadLetras) {
+            return palabra.substring(0, [cantidadLetras]);
+        }
+
+        // Mostramos el resultado
+        document.getElementById("resultado3").innerHTML = `La pista inicial es: ${generarPista(palabra, cantidadLetras)}`;
+    }
+
+// EJERCICIO 4
+
+    function ejercicio4() {
+        // Sacamos los datos (y los pasamos a int)
+        let numeros = document.getElementById("numeros").value.split(",").map(numero => numero = parseInt(numero));
+
+        // Función recursiva de suma
+        function sumar(numeros) {
+            // Si está vacío, devuelve 0
+            if (isNaN(numeros[0])) {
+                return 0;
+            }
+            // Si quedan más elementos, devuelve el primer número + la suma de los siguientes
+            return numeros[0] + sumar(numeros.slice(1));
+        }
+
+        // Mostramos el resultado
+        document.getElementById("resultado4").innerHTML = sumar(numeros);
+    }
+
+    </script>
+</body>
+</html>

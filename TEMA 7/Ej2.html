@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 2: Catálogo de Productos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Catálogo de Productos</h1>
+    <div class="controls">
+        <button id="btnFiltrar">Filtrar stock bajo (&lt;10)</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Marca</th>
+            </tr>
+        </thead>
+        <tbody id="tablaBody"></tbody>
+    </table>
+
+    <script>
+        let productos = [];
+        const root = document.getElementById('tablaBody');
+
+        async function cargarProductos() {
+            const res = await fetch('https://dummyjson.com/products');
+            const data = await res.json();
+            productos = data.products;
+            render(productos);
+        }
+
+        function render(lista) {
+            root.innerHTML = lista.map(p => `
+                <tr>
+                    <td>${p.title}</td>
+                    <td>${p.price}€</td>
+                    <td style="color: ${p.stock < 10 ? 'red' : 'inherit'}; font-weight: ${p.stock < 10 ? 'bold' : 'normal'}">${p.stock}</td>
+                    <td>${p.brand || 'N/A'}</td>
+                </tr>
+            `).join('');
+        }
+
+        document.getElementById('btnFiltrar').onclick = () => {
+            const filtrados = productos.filter(p => p.stock < 10);
+            render(filtrados);
+        };
+
+        cargarProductos();
+    </script>
+</body>
+
+</html>

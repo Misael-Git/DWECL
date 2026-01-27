@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Equipo Pokémon - Tabla Async</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 20px; }
+        table { margin: 20px auto; border-collapse: collapse; width: 80%; background: white; }
+        th, td { border: 1px solid #ccc; padding: 10px; }
+        th { background-color: #ff1f1f; color: white; }
+        img { width: 60px; }
+    </style>
+</head>
+<body>
+
+    <h1>Mi Equipo Pokémon</h1>
+    <button onclick="cargarEquipo()">Cargar Entrenador</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Foto</th>
+                <th>Nombre</th>
+                <th>Habilidad</th>
+            </tr>
+        </thead>
+        <tbody id="tablaBody">
+            </tbody>
+    </table>
+
+    <script>
+        async function cargarEquipo() {
+            const cuerpoTabla = document.getElementById("tablaBody");
+            const equipoIds = [25, 4, 7]; // Pikachu, Charmander, Squirtle
+
+            // Limpiamos la tabla antes de empezar
+            cuerpoTabla.innerHTML = "";
+
+            try {
+                // Usamos un bucle para pedir cada Pokémon
+                for (const id of equipoIds) {
+                    
+                    // SEMÁFORO EN ROJO: Esperamos la respuesta de la API
+                    const respuesta = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+                    
+                    // SEMÁFORO EN ROJO: Esperamos a convertirlo en datos usables
+                    const pokemon = await respuesta.json();
+
+                    // SEMÁFORO EN VERDE: Construimos la fila y la añadimos
+                    const fila = `
+                        <tr>
+                            <td><img src="${pokemon.sprites.front_default}"></td>
+                            <td>${pokemon.name.toUpperCase()}</td>
+                            <td>${pokemon.abilities[0].ability.name}</td>
+                        </tr>
+                    `;
+                    
+                    cuerpoTabla.innerHTML += fila;
+                }
+            } catch (error) {
+                alert("Hubo un error al conectar con la PokéAPI");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 3: Buscador de Productos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Buscador de Productos</h1>
+    <div class="controls">
+        <input type="text" id="busqueda" placeholder="Ej: phone, apple, laptop...">
+        <button id="btnBuscar">Buscar</button>
+    </div>
+
+    <p id="mensaje" class="error"></p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Dcto (%)</th>
+            </tr>
+        </thead>
+        <tbody id="tablaBody"></tbody>
+    </table>
+
+    <script>
+        const input = document.getElementById('busqueda');
+        const root = document.getElementById('tablaBody');
+        const mensaje = document.getElementById('mensaje');
+
+        document.getElementById('btnBuscar').onclick = async () => {
+            const query = input.value;
+            mensaje.innerText = '';
+            root.innerHTML = '';
+
+            try {
+                const res = await fetch(`https://dummyjson.com/products/search?q=${query}`);
+                const data = await res.json();
+
+                if (data.products.length === 0) {
+                    mensaje.innerText = "No se encontraron productos que coincidan con tu búsqueda";
+                } else {
+                    root.innerHTML = data.products.map(p => `
+                        <tr>
+                            <td><img src="${p.thumbnail}"></td>
+                            <td><strong>${p.title}</strong></td>
+                            <td style="font-size: 0.9em; color: #666;">${p.description.substring(0, 70)}...</td>
+                            <td>${p.discountPercentage}%</td>
+                        </tr>
+                    `).join('');
+                }
+            } catch (err) {
+                mensaje.innerText = "Error en la conexión.";
+            }
+        };
+
+        // Permitir buscar al pulsar Enter
+        input.addEventListener('keypress', (e) => { if (e.key === 'Enter') document.getElementById('btnBuscar').click(); });
+    </script>
+</body>
+
+</html>

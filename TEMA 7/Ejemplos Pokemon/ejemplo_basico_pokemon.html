@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Introducción a Fetch - Nivel Medio</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; text-align: center; background-color: #f4f4f9; padding: 20px; }
+        .pokedex { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); display: inline-block; min-width: 300px; }
+        img { width: 150px; height: 150px; background: #eee; border-radius: 50%; margin: 10px; }
+        button { background: #ff1f1f; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #cc0000; }
+        #mensaje { color: #666; font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <div class="pokedex">
+        <h1>Poké-Fetch</h1>
+        <div id="contenedor">
+            <p id="mensaje">Presiona el botón para llamar a un Pokémon</p>
+        </div>
+        <br>
+        <button onclick="obtenerPokemon()">¡Lanzar Pokéball!</button>
+    </div>
+
+    <script>
+        // ASYNC: Le dice a JS que esta función tendrá "pausas" (await)
+        async function obtenerPokemon() {
+            const contenedor = document.getElementById("contenedor");
+            
+            try {
+                // Feedback visual: El semáforo está por ponerse en rojo
+                contenedor.innerHTML = "<p id='mensaje'>Cargando datos del servidor...</p>";
+
+                // Generamos un ID aleatorio del 1 al 150
+                const id = Math.floor(Math.random() * 150) + 1;
+
+                // AWAIT 1: El cartero (fetch) sale a la API. El código se detiene aquí.
+                const respuesta = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+
+                // Si el cartero no encuentra la dirección (Error 404, etc.)
+                if (!respuesta.ok) throw new Error("No se pudo conectar");
+
+                // AWAIT 2: Esperamos a que el paquete se abra (convertir a JSON)
+                const pokemon = await respuesta.json();
+
+                // LLEGADA: El semáforo está en verde. Pintamos los datos finales.
+                contenedor.innerHTML = `
+                    <img src="${pokemon.sprites.front_default}">
+                    <h2>${pokemon.name.toUpperCase()}</h2>
+                    <p>Tipo: ${pokemon.types[0].type.name}</p>
+                `;
+
+            } catch (error) {
+                // Si el cartero se pierde o no hay internet, saltamos aquí
+                console.error(error);
+                contenedor.innerHTML = `<p style="color:red">Error: ${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>

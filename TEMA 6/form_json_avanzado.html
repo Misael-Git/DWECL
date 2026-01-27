@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gestor JSON Avanzado</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            padding: 30px;
+            background-color: #f4f7f6;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        /* Estilos del Formulario */
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        /* Botones */
+        .botones {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            color: white;
+            min-width: 120px;
+        }
+
+        .btn-add {
+            background-color: #007bff;
+        }
+
+        .btn-clear {
+            background-color: #dc3545;
+        }
+
+        .btn-download {
+            background-color: #28a745;
+        }
+
+        /* Verde para descargar */
+        .btn-upload {
+            background-color: #fd7e14;
+        }
+
+        /* Naranja para subir */
+
+        /* Input de archivo oculto */
+        #inputArchivo {
+            display: none;
+        }
+
+        /* Tabla */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Estilos condicionales */
+        .suspenso {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        /* Texto rojo si suspende */
+        .repetidor-badge {
+            background: #6c757d;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Gestor de Notas (JSON)</h2>
+
+        <form id="formAlumno">
+            <div class="form-group">
+                <input type="text" id="nombre" placeholder="Nombre" required>
+            </div>
+
+            <div class="form-group">
+                <input type="text" id="apellidos" placeholder="Apellidos" required>
+            </div>
+
+            <div class="form-group" style="display: flex; gap: 10px;">
+                <input type="number" id="edad" placeholder="Edad" min="0" required style="flex: 1;">
+                <input type="text" id="movil" placeholder="Móvil (9 dígitos, empieza por 6)" pattern="6[0-9]{8}"
+                    title="Debe tener 9 dígitos y empezar por 6" required style="flex: 2;">
+            </div>
+
+            <div class="form-group" style="display: flex; gap: 10px;">
+                <input type="number" id="nota" placeholder="Nota (0-10)" min="0" max="10" step="0.1" required
+                    style="flex: 2;">
+                <div
+                    style="flex: 1; display: flex; align-items: center; justify-content: center; border: 1px solid #ddd; border-radius: 5px; background: #fafafa;">
+                    <label>
+                        <input type="checkbox" id="repetidor"> Repetidor
+                    </label>
+                </div>
+            </div>
+
+            <div class="botones">
+                <button type="submit" class="btn-add">💾 Guardar</button>
+                <button type="button" id="btnBorrarTodo" class="btn-clear">🗑️ Borrar Todo</button>
+            </div>
+        </form>
+
+        <hr>
+
+        <div class="botones">
+            <button type="button" onclick="descargarJSON()" class="btn-download">⬇️ Descargar JSON</button>
+            <button type="button" onclick="document.getElementById('inputArchivo').click()" class="btn-upload">⬆️ Cargar
+                JSON</button>
+            <input type="file" id="inputArchivo" accept=".json">
+        </div>
+
+        <table id="tabla">
+            <thead>
+                <tr>
+                    <th>Nombre y Apellidos</th>
+                    <th>Edad</th>
+                    <th>Móvil</th>
+                    <th>Nota</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpo"></tbody>
+        </table>
+    </div>
+
+    <script>
+        let alumnos = JSON.parse(localStorage.getItem('alumnos_db')) || [];
+        const cuerpo = document.getElementById('cuerpo');
+
+        renderizar();
+
+        // --- LÓGICA DE GUARDADO ---
+        document.getElementById('formAlumno').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // LECCIÓN 1: Capturar tipos de datos correctos
+            const nombre = document.getElementById('nombre').value;
+            const apellidos = document.getElementById('apellidos').value;
+            const edad = parseInt(document.getElementById('edad').value);
+            const movil = document.getElementById('movil').value;
+            const nota = parseFloat(document.getElementById('nota').value);
+            const repetidor = document.getElementById('repetidor').checked;
+
+            const nuevo = { nombre, apellidos, edad, movil, nota, repetidor };
+
+            alumnos.push(nuevo);
+            guardarYSincronizar();
+            e.target.reset();
+        });
+
+        // --- LÓGICA DE IMPORTAR / EXPORTAR ---
+
+        // A. DESCARGAR (Crear archivo al vuelo)
+        function descargarJSON() {
+            // LECCIÓN 2: Formatear el JSON para que sea legible (null, 2)
+            const datosStr = JSON.stringify(alumnos, null, 2);
+            const blob = new Blob([datosStr], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = "notas_curso.json";
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // B. CARGAR (Leer archivo del usuario)
+        document.getElementById('inputArchivo').addEventListener('change', (e) => {
+            const archivo = e.target.files[0];
+            if (!archivo) return;
+
+            const lector = new FileReader();
+            lector.onload = function (evento) {
+                try {
+                    // LECCIÓN 3: Deserializar y actualizar memoria
+                    const contenido = evento.target.result;
+                    alumnos = JSON.parse(contenido);
+                    guardarYSincronizar();
+                    alert("¡Datos cargados correctamente!");
+                } catch (err) {
+                    alert("Error: El archivo no es un JSON válido.");
+                }
+            };
+            lector.readAsText(archivo);
+            e.target.value = ''; // Limpiar input para permitir cargar el mismo archivo de nuevo
+        });
+
+        // --- UTILIDADES ---
+
+        document.getElementById('btnBorrarTodo').addEventListener('click', () => {
+            if (confirm("¿Borrar todo?")) {
+                alumnos = [];
+                guardarYSincronizar();
+            }
+        });
+
+        function guardarYSincronizar() {
+            localStorage.setItem('alumnos_db', JSON.stringify(alumnos));
+            renderizar();
+        }
+
+        function renderizar() {
+            cuerpo.innerHTML = "";
+            alumnos.forEach((alum) => {
+                const tr = document.createElement('tr');
+
+                // Lógica visual basada en datos
+                const claseNota = alum.nota < 5 ? 'suspenso' : '';
+                const etiquetaRepetidor = alum.repetidor ? '<span class="repetidor-badge">Rep</span>' : '';
+
+                tr.innerHTML = `
+                <td>${alum.nombre} ${alum.apellidos} ${etiquetaRepetidor}</td>
+                <td>${alum.edad}</td>
+                <td>${alum.movil}</td>
+                <td class="${claseNota}">${alum.nota}</td>
+                <td>${alum.nota >= 5 ? 'Aprobado' : 'Suspenso'}</td>
+            `;
+                cuerpo.appendChild(tr);
+            });
+        }
+    </script>
+
+</body>
+
+</html>

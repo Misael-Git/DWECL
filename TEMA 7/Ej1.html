@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 1: El Equipo Pokémon</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>El Equipo Pokémon</h1>
+    <div class="controls">
+        <button id="btnCargar">Cargar Equipo</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Foto</th>
+                <th>Nombre</th>
+                <th>Experiencia</th>
+            </tr>
+        </thead>
+        <tbody id="tablaBody"></tbody>
+    </table>
+
+    <script>
+        const ids = [1, 4, 7, 25, 133];
+        const btn = document.getElementById('btnCargar');
+        const root = document.getElementById('tablaBody');
+
+        btn.onclick = async () => {
+            root.innerHTML = '';
+            for (const id of ids) {
+                const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+                const data = await res.json();
+
+                root.innerHTML += `
+                    <tr>
+                        <td><img src="${data.sprites.front_default}"></td>
+                        <td style="text-transform: capitalize;">${data.name}</td>
+                        <td>${data.base_experience} exp</td>
+                    </tr>
+                `;
+            }
+        };
+    </script>
+</body>
+
+</html>

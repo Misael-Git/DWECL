@@ -1,0 +1,27 @@
+Fecha: 2026-02-06 12:29:01
+Método: POST
+Datos recibidos: Array
+(
+    [nombre] => Misael
+    [correo] => misael@g.com
+)
+
+-----------------------------------
+Fecha: 2026-02-06 12:35:03
+Método: POST
+Datos recibidos: Array
+(
+    [nombre] => Misael
+    [correo] => misa@g.com
+)
+
+-----------------------------------
+Fecha: 2026-02-06 12:36:04
+Método: POST
+Datos recibidos: Array
+(
+    [nombre] => Ferrari
+    [correo] => ferrariland@a
+)
+
+-----------------------------------

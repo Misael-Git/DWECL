@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario AJAX Fetch</title>
+</head>
+
+<body>
+    <h2>Gestión de Usuarios</h2>
+    <form id="miFormulario">
+        <input type="hidden" id="userId" name="id"> <!-- Para saber si editamos -->
+
+        <input type="text" name="nombre" id="nombre" placeholder="Nombre" required>
+        <input type="email" name="correo" id="correo" placeholder="Correo" required>
+        <input type="tel" name="telefono" id="telefono" placeholder="Teléfono">
+        <input type="number" name="edad" id="edad" placeholder="Edad" min="18" required>
+
+        <select name="idioma" id="idioma">
+            <option value="">Selecciona Idioma</option>
+            <option value="Español">Español</option>
+            <option value="Inglés">Inglés</option>
+            <option value="Francés">Francés</option>
+            <option value="Otro">Otro</option>
+        </select>
+
+        <button type="submit" id="btnEnviar">Registrar</button>
+        <button type="button" id="btnCancelar" style="display:none;">Cancelar</button>
+    </form>
+
+    <div id="mensajeRespuesta"></div>
+
+    <h3>Lista de Usuarios</h3>
+    <table border="1" width="100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Edad</th>
+                <th>Idioma</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tablaUsuarios">
+            <!-- Se llena con JS -->
+        </tbody>
+    </table>
+    <script src="app.js"></script>
+</body>
+
+</html>

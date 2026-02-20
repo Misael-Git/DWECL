@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Examen DWEC - CRUD</title>
+    <style>
+        /* Estilo básico de estudiante */
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #fafafa;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 15px;
+            background: #fff;
+        }
+
+        input,
+        select,
+        button {
+            margin: 5px;
+            padding: 5px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background: #fff;
+        }
+
+        th,
+        td {
+            border: 1px solid #999;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #eee;
+        }
+
+        .err {
+            color: red;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        /* Modal simple */
+        #modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        #modal>div {
+            background: #fff;
+            padding: 20px;
+            border: 2px solid #000;
+            min-width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Gestión de Productos (Examen)</h2>
+
+    <form id="formCrear">
+        <input type="text" id="codigo" placeholder="Código (9 car.)" maxlength="9">
+        <input type="text" id="nombre" placeholder="Nombre">
+        <select id="talla">
+            <option value="">-- Talla --</option>
+            <option>XS</option>
+            <option>S</option>
+            <option>M</option>
+            <option>L</option>
+            <option>XL</option>
+            <option>XXL</option>
+        </select>
+        <input type="number" id="precio" placeholder="Precio" step="0.01">
+        <input type="email" id="email_creador" placeholder="Email">
+        <button type="submit">Añadir Producto</button>
+    </form>
+    <p id="err-form" class="err"></p>
+
+    <div style="margin-bottom: 10px;">
+        <b>Estadísticas:</b>
+        Total <span id="statTotal">0</span> |
+        Precio Medio <span id="statAvg">0</span>
+        <span style="margin-left: 50px;">
+            Buscar: <input id="buscar" type="search" placeholder="filtro...">
+        </span>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Talla</th>
+                <th>Precio</th>
+                <th>Email</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tabla"></tbody>
+    </table>
+
+    <!-- Ventana Modal de Edición -->
+    <div id="modal">
+        <div>
+            <h3>Editar Datos</h3>
+            <form id="formEditar">
+                <input type="hidden" id="editId">
+                <p>Código: <input id="editCodigo" maxlength="9"></p>
+                <p>Nombre: <input id="editNombre"></p>
+                <p>Talla:
+                    <select id="editTalla">
+                        <option>XS</option>
+                        <option>S</option>
+                        <option>M</option>
+                        <option>L</option>
+                        <option>XL</option>
+                        <option>XXL</option>
+                    </select>
+                </p>
+                <p>Precio: <input id="editPrecio" type="number" step="0.01"></p>
+                <p>Email: <input id="editEmail" type="email"></p>
+                <button type="submit">Guardar</button>
+                <button type="button" onclick="cerrarModal()">Cerrar</button>
+            </form>
+            <p id="err-edit" class="err"></p>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+
+</html>

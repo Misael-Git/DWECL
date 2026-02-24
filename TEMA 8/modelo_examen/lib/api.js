@@ -2,6 +2,7 @@ const BASE_URL = 'api.php';
 
 /**
  * Petición genérica al API con manejo de errores centralizado.
+ * USO DE ASINCRONÍA (async/await) Y FETCH API PARA RED.
  */
 export async function peticion(url, opciones = {}) {
     try {
@@ -22,6 +23,7 @@ export async function peticion(url, opciones = {}) {
     }
 }
 
+/* CRUD DESDE EL FRONTEND LLAMANDO A LOS VERBOS HTTP */
 export const API = {
     getProductos: () => peticion(''),
     getProducto: (id) => peticion(`?id=${id}`),

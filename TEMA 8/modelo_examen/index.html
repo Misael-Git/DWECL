@@ -76,6 +76,7 @@
 
     <h2>Gestión de Productos (Examen)</h2>
 
+    <!-- Formulario para Crear un producto (CRUD - Create) -->
     <form id="formCrear">
         <input type="text" id="codigo" placeholder="Código (9 car.)" maxlength="9">
         <input type="text" id="nombre" placeholder="Nombre">
@@ -100,6 +101,12 @@
         Precio Medio <span id="statAvg">0</span>
         <span style="margin-left: 50px;">
             Buscar: <input id="buscar" type="search" placeholder="filtro...">
+        </span>
+        <!-- CARGA/DESCARGA JSON - Botones para invocar las funciones en app.js -->
+        <span style="margin-left: 20px;">
+            <button id="btnDescargarJSON" style="background-color: #4CAF50; color: white;">Descargar JSON</button>
+            <input type="file" id="fileJSON" accept=".json" style="display:none;">
+            <button id="btnCargarJSON" style="background-color: #2196F3; color: white;">Cargar JSON</button>
         </span>
     </div>
 

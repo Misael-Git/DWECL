@@ -14,7 +14,13 @@ require_once 'config.php';
 $method = $_SERVER['REQUEST_METHOD'];
 $id     = isset($_GET['id']) ? (int)$_GET['id'] : null;
 
-// --- GET ---
+$id     = isset($_GET['id']) ? (int)$_GET['id'] : null;
+
+// ============================================================
+// EXAMEN: CRUD (Create, Read, Update, Delete) - LADO SERVIDOR
+// ============================================================
+
+// --- READ (GET) ---
 if ($method === 'GET') {
     if ($id) {
         $s = $pdo->prepare('SELECT * FROM productos WHERE id = ?');
@@ -25,7 +31,7 @@ if ($method === 'GET') {
     ok(200, $pdo->query('SELECT * FROM productos ORDER BY id')->fetchAll());
 }
 
-// --- POST ---
+// --- CREATE (POST) ---
 if ($method === 'POST') {
     $d = json_decode(file_get_contents('php://input'), true) ?? $_POST;
     
@@ -45,7 +51,7 @@ if ($method === 'POST') {
     }
 }
 
-// --- PUT ---
+// --- UPDATE (PUT) ---
 if ($method === 'PUT') {
     if (!$id) ok(400, ['error' => 'Se requiere id.']);
     $d = json_decode(file_get_contents('php://input'), true) ?? [];
@@ -75,7 +81,7 @@ if ($method === 'PUT') {
     }
 }
 
-// --- DELETE ---
+// --- DELETE (DELETE) ---
 if ($method === 'DELETE') {
     if (!$id) ok(400, ['error' => 'Se requiere id.']);
     $pdo->prepare('DELETE FROM productos WHERE id = ?')->execute([$id]);

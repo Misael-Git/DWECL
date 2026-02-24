@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Examen DWEC - CRUD</title>
+    <style>
+        /* Estilo básico de estudiante */
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #fafafa;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 15px;
+            background: #fff;
+        }
+
+        input,
+        select,
+        button {
+            margin: 5px;
+            padding: 5px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background: #fff;
+        }
+
+        th,
+        td {
+            border: 1px solid #999;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #eee;
+        }
+
+        .err {
+            color: red;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        /* Modal simple */
+        #modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        #modal>div {
+            background: #fff;
+            padding: 20px;
+            border: 2px solid #000;
+            min-width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Dashboard de Inventario</h2>
+
+    <!-- BOTONES -->
+    <div>
+        <button type="button" onclick="cargarInventario()">Cargar Inventario</button>
+        <button type="button" onclick="mostrarFormCrear()">Nuevo Producto</button>
+        <button type="button" onclick="limpiarPantalla()">Limpiar Pantalla</button>
+
+        <select id="filtroTalla" onchange="renderTabla()">
+            <option value="">Talla</option>
+            <option>XS</option>
+            <option>S</option>
+            <option>M</option>
+            <option>L</option>
+            <option>XL</option>
+            <option>XXL</option>
+        </select>
+    </div>
+
+    <!-- Creación de elementos -->
+    <div id="formCrear" style="display: none;">
+        <h3>Crear elemento</h3>        
+        <form id="formCrear">
+            <p>Código: <input id="codigo" maxlength="9"></p>
+            <p>Nombre: <input id="nombre"></p>
+            <p>Talla:
+                <select id="talla">
+                    <option>XS</option>
+                    <option>S</option>
+                    <option>M</option>
+                    <option>L</option>
+                    <option>XL</option>
+                    <option>XXL</option>
+                </select>
+            </p>
+            <p>Precio: <input id="editPrecio" type="number" step="0.01"></p>
+            <p>Email: <input id="editEmail" type="email"></p>
+            <button type="submit">Añadir Producto</button>
+            <button type="button" onclick="ocultarFormEditar()">Ocultar</button>
+
+        
+        </form>
+        <p id="err-edit" class="err"></p>
+    </div>
+
+    <!-- Edición de los elementos -->
+    <div id="formEditar" style="display: none;">
+        <h3>Editar Elementos</h3>
+        <form id="formEditar">
+            <input type="hidden" id="editId">
+            <p>Código: <input id="editCodigo" maxlength="9"></p>
+            <p>Nombre: <input id="editNombre"></p>
+            <p>Talla:
+                <select id="editTalla">
+                    <option>XS</option>
+                    <option>S</option>
+                    <option>M</option>
+                    <option>L</option>
+                    <option>XL</option>
+                    <option>XXL</option>
+                </select>
+            </p>
+            <p>Precio: <input id="editPrecio" type="number" step="0.01"></p>
+            <p>Email: <input id="editEmail" type="email"></p>
+            <button type="submit">Guardar</button>
+            <button type="button" onclick="ocultarFormEditar()">Ocultar</button>
+        </form>
+        <p id="err-edit" class="err"></p>
+    </div>
+
+    <!-- TABLA CON LOS DATOS -->
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Talla</th>
+                <th>Precio</th>
+                <th>Email</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tabla"></tbody>
+    </table>
+
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>
